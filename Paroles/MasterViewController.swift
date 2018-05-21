@@ -64,6 +64,13 @@ class MasterViewController: UITableViewController {
 //                controller.navigationItem.leftItemsSupplementBackButton = true
             }
         }
+        if segue.identifier == "MusicsSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let repertoire = repertoires[indexPath.row]
+                let controller = segue.destination as! MusicsViewController
+                controller.repertoire = repertoire
+            }
+        }
     }
 
     // MARK: - Table View
@@ -99,5 +106,8 @@ class MasterViewController: UITableViewController {
 //    }
 
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MusicsSegue", sender: self)
+    }
 }
 

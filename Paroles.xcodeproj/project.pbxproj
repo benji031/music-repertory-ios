@@ -21,6 +21,9 @@
 		4330C01C20AB59AD00C74108 /* RepertoireServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01B20AB59AD00C74108 /* RepertoireServiceImpl.swift */; };
 		4330C01E20AB5C6B00C74108 /* ServicesRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */; };
 		4330C02020AB5D5A00C74108 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01F20AB5D5A00C74108 /* Log.swift */; };
+		4330C02220AB627D00C74108 /* MusicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02120AB627D00C74108 /* MusicsViewController.swift */; };
+		4330C02520AB63DF00C74108 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02420AB63DF00C74108 /* MusicService.swift */; };
+		4330C02720AB641B00C74108 /* MusicServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02620AB641B00C74108 /* MusicServiceImpl.swift */; };
 		A4A8DC7E48A56914FA57D570 /* Pods_Paroles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7F7C3A61B07085F67C8E95 /* Pods_Paroles.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +46,9 @@
 		4330C01B20AB59AD00C74108 /* RepertoireServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoireServiceImpl.swift; sourceTree = "<group>"; };
 		4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesRegistry.swift; sourceTree = "<group>"; };
 		4330C01F20AB5D5A00C74108 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		4330C02120AB627D00C74108 /* MusicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicsViewController.swift; sourceTree = "<group>"; };
+		4330C02420AB63DF00C74108 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
+		4330C02620AB641B00C74108 /* MusicServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceImpl.swift; sourceTree = "<group>"; };
 		6C7F7C3A61B07085F67C8E95 /* Pods_Paroles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Paroles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +96,7 @@
 				4330C00620AB54EE00C74108 /* Info.plist */,
 				4330C00C20AB567C00C74108 /* AddRepertoireViewController.swift */,
 				4330C01F20AB5D5A00C74108 /* Log.swift */,
+				4330C02120AB627D00C74108 /* MusicsViewController.swift */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
@@ -97,6 +104,7 @@
 		4330C00E20AB583800C74108 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4330C02320AB63D000C74108 /* Music */,
 				4330C01820AB596B00C74108 /* Repertoire */,
 				4330C00F20AB583E00C74108 /* Data */,
 				4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */,
@@ -128,6 +136,15 @@
 				4330C01B20AB59AD00C74108 /* RepertoireServiceImpl.swift */,
 			);
 			path = Repertoire;
+			sourceTree = "<group>";
+		};
+		4330C02320AB63D000C74108 /* Music */ = {
+			isa = PBXGroup;
+			children = (
+				4330C02420AB63DF00C74108 /* MusicService.swift */,
+				4330C02620AB641B00C74108 /* MusicServiceImpl.swift */,
+			);
+			path = Music;
 			sourceTree = "<group>";
 		};
 		B7C87D5DFC106CDDBABC02DA /* Pods */ = {
@@ -262,11 +279,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4330C02220AB627D00C74108 /* MusicsViewController.swift in Sources */,
 				4330BFFD20AB54EE00C74108 /* DetailViewController.swift in Sources */,
+				4330C02520AB63DF00C74108 /* MusicService.swift in Sources */,
 				4330BFFB20AB54EE00C74108 /* MasterViewController.swift in Sources */,
 				4330C02020AB5D5A00C74108 /* Log.swift in Sources */,
 				4330C01220AB585100C74108 /* CoreDataService.swift in Sources */,
 				4330C01720AB587B00C74108 /* Model.xcdatamodeld in Sources */,
+				4330C02720AB641B00C74108 /* MusicServiceImpl.swift in Sources */,
 				4330C01E20AB5C6B00C74108 /* ServicesRegistry.swift in Sources */,
 				4330C01A20AB597A00C74108 /* RepertoireService.swift in Sources */,
 				4330C01320AB585100C74108 /* DataService.swift in Sources */,

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Music" representedClassName="Music" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="repertoires" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Repertoire" inverseName="musics" inverseEntity="Repertoire" syncable="YES"/>
+    </entity>
     <entity name="Repertoire" representedClassName="Repertoire" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="musics" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Music" inverseName="repertoires" inverseEntity="Music" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Repertoire" positionX="-63" positionY="-18" width="128" height="60"/>
+        <element name="Music" positionX="-54" positionY="0" width="128" height="75"/>
+        <element name="Repertoire" positionX="-63" positionY="-18" width="128" height="75"/>
     </elements>
 </model>
