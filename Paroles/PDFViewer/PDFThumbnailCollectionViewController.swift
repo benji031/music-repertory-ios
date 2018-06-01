@@ -17,7 +17,18 @@ protocol PDFThumbnailControllerDelegate: class {
 /// Bottom collection of thumbnails that the user can interact with
 internal final class PDFThumbnailCollectionViewController: UICollectionViewController {
     /// Current document being displayed
-    var document: PDFDocument!
+    var document: PDFDocument? {
+        didSet {
+            DispatchQueue.global(qos: .background).async {
+                self.document?.allPageImages(callback: { (images) in
+                    DispatchQueue.main.async {
+                        self.pageImages = images
+                        self.currentPageIndex = 0
+                    }
+                })
+            }
+        }
+    }
     
     /// Current page index being displayed
     var currentPageIndex: Int = 0 {
@@ -45,13 +56,7 @@ internal final class PDFThumbnailCollectionViewController: UICollectionViewContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.global(qos: .background).async {
-            self.document.allPageImages(callback: { (images) in
-                DispatchQueue.main.async {
-                    self.pageImages = images
-                }
-            })
-        }
+        
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

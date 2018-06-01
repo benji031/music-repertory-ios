@@ -24,11 +24,10 @@
 		4330C02220AB627D00C74108 /* MusicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02120AB627D00C74108 /* MusicsViewController.swift */; };
 		4330C02520AB63DF00C74108 /* MusicService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02420AB63DF00C74108 /* MusicService.swift */; };
 		4330C02720AB641B00C74108 /* MusicServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C02620AB641B00C74108 /* MusicServiceImpl.swift */; };
-		43513E7A20B330A800AA77E9 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7920B330A800AA77E9 /* PDFViewController.swift */; };
+		43513E7A20B330A800AA77E9 /* TempPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7920B330A800AA77E9 /* TempPDFViewController.swift */; };
 		43513E7C20B333F500AA77E9 /* partition.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 43513E7B20B333F400AA77E9 /* partition.pdf */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
 		43513E8020B36AEE00AA77E9 /* Rita Ora - for you.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 43513E7F20B36AEE00AA77E9 /* Rita Ora - for you.pdf */; };
-		43AD1D8420B8518C00C92526 /* CustomPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8320B8518C00C92526 /* CustomPDFViewController.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
 		43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */; };
 		43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8820B8524F00C92526 /* PDFPageView.swift */; };
@@ -62,12 +61,11 @@
 		4330C02120AB627D00C74108 /* MusicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicsViewController.swift; sourceTree = "<group>"; };
 		4330C02420AB63DF00C74108 /* MusicService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicService.swift; sourceTree = "<group>"; };
 		4330C02620AB641B00C74108 /* MusicServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicServiceImpl.swift; sourceTree = "<group>"; };
-		43513E7920B330A800AA77E9 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
+		43513E7920B330A800AA77E9 /* TempPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPDFViewController.swift; sourceTree = "<group>"; };
 		43513E7B20B333F400AA77E9 /* partition.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = partition.pdf; sourceTree = "<group>"; };
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		43513E7F20B36AEE00AA77E9 /* Rita Ora - for you.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Rita Ora - for you.pdf"; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
-		43AD1D8320B8518C00C92526 /* CustomPDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPDFViewController.swift; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
 		43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8820B8524F00C92526 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
@@ -128,9 +126,8 @@
 				4330C00C20AB567C00C74108 /* AddRepertoireViewController.swift */,
 				4330C01F20AB5D5A00C74108 /* Log.swift */,
 				4330C02120AB627D00C74108 /* MusicsViewController.swift */,
-				43513E7920B330A800AA77E9 /* PDFViewController.swift */,
+				43513E7920B330A800AA77E9 /* TempPDFViewController.swift */,
 				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
-				43AD1D8320B8518C00C92526 /* CustomPDFViewController.swift */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
@@ -259,7 +256,7 @@
 								enabled = 1;
 							};
 							com.apple.iCloud = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -345,7 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43513E7A20B330A800AA77E9 /* PDFViewController.swift in Sources */,
+				43513E7A20B330A800AA77E9 /* TempPDFViewController.swift in Sources */,
 				4330C02220AB627D00C74108 /* MusicsViewController.swift in Sources */,
 				4330BFFD20AB54EE00C74108 /* DetailViewController.swift in Sources */,
 				4330C02520AB63DF00C74108 /* MusicService.swift in Sources */,
@@ -361,7 +358,6 @@
 				43AD1D9320B8524F00C92526 /* PDFDocument.swift in Sources */,
 				43AD1D9020B8524F00C92526 /* PDFViewController.swift in Sources */,
 				4330C01A20AB597A00C74108 /* RepertoireService.swift in Sources */,
-				43AD1D8420B8518C00C92526 /* CustomPDFViewController.swift in Sources */,
 				4330C01320AB585100C74108 /* DataService.swift in Sources */,
 				43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */,
 				43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */,
@@ -508,12 +504,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Paroles/Paroles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU9RUWYF25;
+				DEVELOPMENT_TEAM = BN7K75ZTE5;
 				INFOPLIST_FILE = Paroles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DLOG_ENABLE -DLOG_DETAIL_INFO";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.Paroles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.repertory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -527,12 +523,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Paroles/Paroles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WU9RUWYF25;
+				DEVELOPMENT_TEAM = BN7K75ZTE5;
 				INFOPLIST_FILE = Paroles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DLOG_ENABLE -DLOG_DETAIL_INFO";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.Paroles;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.repertory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

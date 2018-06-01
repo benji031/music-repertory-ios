@@ -1,15 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iqd-FA-oQ4">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="iqd-FA-oQ4">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="9RY-nl-oTK">
             <objects>
-                <viewController restorationIdentifier="PDFViewController" storyboardIdentifier="PDFViewController" automaticallyAdjustsScrollViewInsets="NO" id="iqd-FA-oQ4" customClass="PDFViewController" customModule="PDFReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="PDFViewController" storyboardIdentifier="PDFViewController" automaticallyAdjustsScrollViewInsets="NO" id="iqd-FA-oQ4" customClass="PDFViewController" customModule="Paroles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5MZ-3M-tJA"/>
                         <viewControllerLayoutGuide type="bottom" id="bKE-eF-3Dz"/>
@@ -19,6 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xgz-br-S4l">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="UBd-Nd-OUA">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -32,13 +36,15 @@
                                 </connections>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="spp-zz-ZXW">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpt-Eg-xUH">
+                                        <rect key="frame" x="-12.5" y="0.0" width="400" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="400" id="AiN-T1-0xx"/>
                                         </constraints>
                                         <connections>
-                                            <segue destination="yo8-rx-ycP" kind="embed" id="nVa-rp-9h0"/>
+                                            <segue destination="yo8-rx-ycP" kind="embed" identifier="ThumbnailSegue" id="nVa-rp-9h0"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -78,7 +84,7 @@
         <!--Thumbnail Collection View Controller-->
         <scene sceneID="a0d-VQ-36h">
             <objects>
-                <collectionViewController id="yo8-rx-ycP" customClass="PDFThumbnailCollectionViewController" customModule="PDFReader" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="yo8-rx-ycP" customClass="PDFThumbnailCollectionViewController" customModule="Paroles" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="pAs-g9-8qc">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="44"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,14 +96,16 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="RgM-mZ-J7S" customClass="PDFThumbnailCell" customModule="PDFReader" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="RgM-mZ-J7S" customClass="PDFThumbnailCell" customModule="Paroles" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="-18" width="60" height="80"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qqO-mN-48T"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qqO-mN-48T">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="80"/>
+                                        </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>

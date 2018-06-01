@@ -66,9 +66,6 @@ class TempPDFViewController: UIViewController {
         title = documents[selectedDocument].name
         currentPage = 0
         
-        let document = PDFDocument(fileData: data, fileName: "Sample PDF")!
-        let controller = PDFReader.PDFViewController.createNew(with: document, isThumbnailsEnabled: false)
-        controller.
     }
     
     @IBOutlet var nextTapGestureRecognizerDidTapped: UITapGestureRecognizer!

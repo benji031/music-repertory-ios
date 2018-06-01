@@ -20,17 +20,15 @@ extension PDFViewController {
     /// - parameter startPageIndex:      page index to start on load, defaults to 0; if out of bounds, set to 0
     ///
     /// - returns: a `PDFViewController`
-    public class func createNew(with document: PDFDocument, title: String? = nil, actionButtonImage: UIImage? = nil, actionStyle: ActionStyle = .print, backButton: UIBarButtonItem? = nil, isThumbnailsEnabled: Bool = true, startPageIndex: Int = 0) -> PDFViewController {
+    public class func createNew(with document: PDFDocument, actionButtonImage: UIImage? = nil, actionStyle: ActionStyle = .print, isThumbnailsEnabled: Bool = true, startPageIndex: Int = 0) -> PDFViewController {
         let storyboard = UIStoryboard(name: "PDFReader", bundle: Bundle(for: PDFViewController.self))
         let controller = storyboard.instantiateInitialViewController() as! PDFViewController
         controller.document = document
         controller.actionStyle = actionStyle
         
-        if let title = title {
-            controller.title = title
-        } else {
-            controller.title = document.fileName
-        }
+
+        controller.title = document.fileName
+        
         
         if startPageIndex >= 0 && startPageIndex < document.pageCount {
             controller.currentPageIndex = startPageIndex
@@ -38,7 +36,7 @@ extension PDFViewController {
             controller.currentPageIndex = 0
         }
         
-        controller.backButton = backButton
+//        controller.backButton = backButton
         
         if let actionButtonImage = actionButtonImage {
             controller.actionButton = UIBarButtonItem(image: actionButtonImage, style: .plain, target: controller, action: #selector(actionButtonPressed))
@@ -46,6 +44,17 @@ extension PDFViewController {
             controller.actionButton = UIBarButtonItem(barButtonSystemItem: .action, target: controller, action: #selector(actionButtonPressed))
         }
         controller.isThumbnailsEnabled = isThumbnailsEnabled
+        return controller
+    }
+    
+    class func createNew(with documents: [Document], selectedDocument: Int) -> PDFViewController {
+        let data = try! Data(contentsOf: documents[selectedDocument].url)
+        let document = PDFDocument(fileData: data, fileName: documents[selectedDocument].name)
+        
+        let controller = createNew(with: document!)
+        controller.selectedDocument = selectedDocument
+        controller.documents = documents
+        
         return controller
     }
 }
@@ -103,8 +112,11 @@ public final class PDFViewController: UIViewController {
         }
     }
     
+    var selectedDocument = 0
+    var documents = [Document]()
+    
     /// Whether or not the thumbnails bar should be enabled
-    private var isThumbnailsEnabled = true {
+    var isThumbnailsEnabled = true {
         didSet {
             if thumbnailCollectionControllerHeight == nil {
                 _ = view
@@ -133,10 +145,56 @@ public final class PDFViewController: UIViewController {
         collectionView.backgroundColor = backgroundColor
         collectionView.register(PDFPageCollectionViewCell.self, forCellWithReuseIdentifier: "page")
         
-        navigationItem.rightBarButtonItem = actionButton
-        if let backItem = backButton {
-            navigationItem.leftBarButtonItem = backItem
+        
+        loadPDF()
+        
+        let nextTouchView = UIView()
+        nextTouchView.backgroundColor = UIColor.clear
+        nextTouchView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(nextTouchView, aboveSubview: collectionView)
+        
+        nextTouchView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        nextTouchView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        nextTouchView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        nextTouchView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/4) .isActive = true
+        
+        let nextTouchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(nextPageOrPDF))
+        nextTouchView.addGestureRecognizer(nextTouchGestureRecognizer)
+        
+        let previousTouchView = UIView()
+        previousTouchView.backgroundColor = UIColor.clear
+        previousTouchView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(previousTouchView, aboveSubview: collectionView)
+        
+        previousTouchView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        previousTouchView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        previousTouchView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        previousTouchView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1/4) .isActive = true
+        
+        let previousTouchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(previousPageOrPDF))
+        previousTouchView.addGestureRecognizer(previousTouchGestureRecognizer)
+    }
+    
+    func loadPDF(to direction: Direction? = nil) {
+        
+        if let direction = direction {
+            switch direction {
+            case .next:
+                selectedDocument = selectedDocument == (documents.count - 1) ? selectedDocument : selectedDocument + 1
+                break
+            case .previous:
+                selectedDocument = selectedDocument - 1 >= 0 ? selectedDocument - 1 : 0
+                break
+            }
         }
+        
+        guard documents.count > 0 else {
+            return
+        }
+        
+        let data = try! Data(contentsOf: documents[selectedDocument].url)
+        document = PDFDocument(fileData: data, fileName: documents[selectedDocument].name)
+        currentPageIndex = 0
         
         let numberOfPages = CGFloat(document.pageCount)
         let cellSpacing = CGFloat(2.0)
@@ -144,6 +202,15 @@ public final class PDFViewController: UIViewController {
         let thumbnailWidth = (numberOfPages * PDFThumbnailCell.cellSize.width) + totalSpacing
         let width = min(thumbnailWidth, view.bounds.width)
         thumbnailCollectionControllerWidth.constant = width
+        thumbnailCollectionController?.currentPageIndex = 0
+        thumbnailCollectionController?.document = document
+        
+        title = document.fileName
+        
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: false)
+        
+        self.collectionView.reloadData()
+        thumbnailCollectionController?.collectionView?.reloadData()
     }
     
     public override func viewDidLayoutSubviews() {
@@ -218,6 +285,26 @@ public final class PDFViewController: UIViewController {
         printInteraction.printingItem = document.fileData
         printInteraction.showsPageRange = true
         printInteraction.present(animated: true, completionHandler: nil)
+    }
+    
+    @objc func nextPageOrPDF() {
+        if currentPageIndex < (document.pageCount - 1) {
+            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex + 1, section: 0), at: .left, animated: true)
+            thumbnailCollectionController?.currentPageIndex = currentPageIndex
+        }
+        else {
+            loadPDF(to: .next)
+        }
+    }
+    
+    @objc func previousPageOrPDF() {
+        if currentPageIndex > 0 {
+            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex - 1, section: 0), at: .left, animated: true)
+            thumbnailCollectionController?.currentPageIndex = currentPageIndex
+        }
+        else {
+            loadPDF(to: .previous)
+        }
     }
 }
 
