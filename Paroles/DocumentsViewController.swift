@@ -16,6 +16,12 @@ typealias Document = (url: URL, name: String)
 class DocumentsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(loadDocument), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor(red: 255/255.0, green: 129/255.0, blue: 38/255.0, alpha: 1.0)
+        return refreshControl
+    }()
     
     var directory = "koncept"
     var documents = [Document]()
@@ -25,6 +31,7 @@ class DocumentsViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.addSubview(refreshControl)
         
         self.loadDocument()
     }
@@ -33,7 +40,7 @@ class DocumentsViewController: UIViewController {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(directory, isDirectory: true)
     }
     
-    func loadDocument() {
+    @objc func loadDocument() {
         let documentsURL = repertoryDirectoryPath()
         do {
             let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
@@ -45,6 +52,7 @@ class DocumentsViewController: UIViewController {
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
+        refreshControl.endRefreshing()
     }
     
     override func didReceiveMemoryWarning() {
