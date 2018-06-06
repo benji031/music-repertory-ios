@@ -12,14 +12,12 @@ import SwinjectStoryboard
 extension SwinjectStoryboard {
     @objc class func setup() {
         defaultContainer.register(DataService.self) { _ in CoreDataService() }
-        defaultContainer.register(RepertoireService.self) { r in
-            RepertoireServiceImpl(with: r.resolve(DataService.self))
+        defaultContainer.register(RepertoryService.self) { r in
+            RepertoryServiceImpl(with: r.resolve(DataService.self))
         }
-        defaultContainer.storyboardInitCompleted(AddRepertoireViewController.self) { (r, c) in
-            c.repertoireService = r.resolve(RepertoireService.self)
-        }
-        defaultContainer.storyboardInitCompleted(MasterViewController.self) { (r, c) in
-            c.repertoireService = r.resolve(RepertoireService.self)
+        
+        defaultContainer.storyboardInitCompleted(RepertoriesViewController.self) { (r, c) in
+            c.repertoryService = r.resolve(RepertoryService.self)
         }
     }
 }

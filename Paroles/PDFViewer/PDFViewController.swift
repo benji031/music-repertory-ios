@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum Direction {
+    case previous
+    case next
+}
+
 extension PDFViewController {
     /// Initializes a new `PDFViewController`
     ///
