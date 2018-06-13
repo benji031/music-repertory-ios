@@ -3,7 +3,7 @@
     <entity name="Music" representedClassName="Music" isAbstract="YES" syncable="YES" codeGenerationType="class">
         <attribute name="name" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="PDFMusic" representedClassName="PDFMusic" parentEntity="Music" syncable="YES" codeGenerationType="class">
+    <entity name="PDFMusic" representedClassName="PDFMusic" parentEntity="Music" syncable="YES">
         <attribute name="documentPath" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Repertory" representedClassName="Repertory" syncable="YES" codeGenerationType="class">
@@ -17,8 +17,8 @@
     </entity>
     <elements>
         <element name="Music" positionX="-54" positionY="0" width="128" height="58"/>
+        <element name="PDFMusic" positionX="-45" positionY="36" width="128" height="60"/>
         <element name="Repertory" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="RepertoryMusic" positionX="-54" positionY="18" width="128" height="90"/>
-        <element name="PDFMusic" positionX="-45" positionY="36" width="128" height="60"/>
     </elements>
 </model>

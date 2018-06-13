@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+let kBaseRepertoryDirectory = "repertory"
+
 class RepertoryServiceImpl: RepertoryService {
     
     
@@ -32,17 +34,47 @@ class RepertoryServiceImpl: RepertoryService {
         return dataService?.fetchObjects(request: request) ?? []
     }
     
-    func create(pdfMusicWithName name: String, andPdfFile pdfFile: URL) -> PDFMusic?  {
-        guard let music = dataService?.create(type: PDFMusic.self, entityName: "PDFMusic") else {
+    func create(pdfMusicWithName name: String, andPdfFile pdfFile: Data, in repertory: Repertory) -> PDFMusic?  {
+        guard let context  = repertory.managedObjectContext else {
             return nil
         }
+        
+        guard let music = dataService?.create(type: PDFMusic.self, entityName: "PDFMusic", in: context) else {
+            return nil
+        }
+        
+        let fileName = UUID().uuidString
+        let newURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(fileName)
+        try? pdfFile.write(to: newURL)
+        
         music.name = name
+        music.documentPath = fileName
         dataService?.save(music)
+        
+        insert(music: music, in: repertory)
+        
         return music
     }
     
+    @discardableResult
     func insert(music: Music, in repertory: Repertory) -> Repertory {
-        return Repertory()
+        guard let context  = repertory.managedObjectContext else {
+            return repertory
+        }
+        
+        guard let repertoryMusic = dataService?.create(type: RepertoryMusic.self, entityName: "RepertoryMusic", in: context) else {
+            return repertory
+        }
+        repertoryMusic.repertory = repertory
+        repertoryMusic.music = music
+        
+        repertory.addToMusics(repertoryMusic)
+        
+        dataService?.save(context)
+        return repertory
     }
     
+    func get(musicsFor repertory: Repertory) -> [Music] {
+        return (repertory.musics?.compactMap({($0 as! RepertoryMusic).music })) ?? [Music]()
+    }
 }

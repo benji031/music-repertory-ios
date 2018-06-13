@@ -48,6 +48,7 @@ class RepertoriesViewController: UIViewController {
         else {
             displayRepertories(true)
         }
+        refreshControl.endRefreshing()
         tableView.reloadData()
     }
     
@@ -81,7 +82,7 @@ class RepertoriesViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "RepertorySegue" {
             let destination = segue.destination as! DocumentsViewController
-            
+            destination.repertory = sender as! Repertory
         }
     }
 

@@ -19,5 +19,9 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(RepertoriesViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
         }
+        
+        defaultContainer.storyboardInitCompleted(DocumentsViewController.self) { (r, c) in
+            c.repertoryService = r.resolve(RepertoryService.self)
+        }
     }
 }

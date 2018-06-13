@@ -9,12 +9,12 @@
 import UIKit
 import MobileCoreServices
 
-let kBaseRepertoryDirectory = "repertory"
-
 typealias Document = (url: URL, name: String)
 
 class DocumentsViewController: UIViewController {
 
+    var repertoryService: RepertoryService?
+    
     @IBOutlet weak var tableView: UITableView!
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -23,8 +23,8 @@ class DocumentsViewController: UIViewController {
         return refreshControl
     }()
     
-    var directory = "koncept"
-    var documents = [Document]()
+    var repertory: Repertory!
+    var musics = [Music]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,22 +36,25 @@ class DocumentsViewController: UIViewController {
         self.loadDocument()
     }
 
-    func repertoryDirectoryPath() -> URL {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(directory, isDirectory: true)
-    }
+//    func repertoryDirectoryPath() -> URL {
+//        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(directory, isDirectory: true)
+//    }
     
     @objc func loadDocument() {
-        let documentsURL = repertoryDirectoryPath()
-        do {
-            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-            documents = fileURLs.compactMap({ (url) -> (url: URL, name: String)? in
-                return url.pathExtension == "pdf" ? (url: url, name: url.deletingPathExtension().lastPathComponent) : nil
-            })
-            
-            tableView.reloadData()
-        } catch {
-            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
-        }
+        
+        musics = repertoryService?.get(musicsFor: repertory) ?? [Music]()
+//        let documentsURL = repertoryDirectoryPath()
+//        do {
+//            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+//            documents = fileURLs.compactMap({ (url) -> (url: URL, name: String)? in
+//                return url.pathExtension == "pdf" ? (url: url, name: url.deletingPathExtension().lastPathComponent) : nil
+//            })
+//
+//            tableView.reloadData()
+//        } catch {
+//            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+//        }
+        tableView.reloadData()
         refreshControl.endRefreshing()
     }
     
@@ -69,10 +72,10 @@ class DocumentsViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "DocumentSegue" {
-            let destination = segue.destination as! PDFViewController
-            destination.documents = documents
-            destination.selectedDocument = sender as! Int
-            destination.isThumbnailsEnabled = true
+//            let destination = segue.destination as! PDFViewController
+//            destination.documents = documents
+//            destination.selectedDocument = sender as! Int
+//            destination.isThumbnailsEnabled = true
         }
     }
  
@@ -84,30 +87,30 @@ class DocumentsViewController: UIViewController {
         present(documentPicker, animated: true, completion: nil)
     }
     
-    func rename(document: Document, by newName: String) {
-        guard !newName.isEmpty else {
-            return
-        }
-        
-        let originPath = document.url
-        let destinationPath = originPath.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension("pdf")
-        try? FileManager.default.moveItem(at: originPath, to: destinationPath)
-    }
-    
-    func delete(document: Document, at indexPath: IndexPath? = nil) {
-        do {
-            try FileManager.default.removeItem(at: document.url)
-            
-            if let indexPath = indexPath {
-                documents.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .left)
-            }
-        } catch let error {
-            let alert = UIAlertController(title: "Erreur", message: "Impossible de supprimer le document, une erreur est survenu : \(error.localizedDescription)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+//    func rename(document: Document, by newName: String) {
+//        guard !newName.isEmpty else {
+//            return
+//        }
+//
+//        let originPath = document.url
+//        let destinationPath = originPath.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension("pdf")
+//        try? FileManager.default.moveItem(at: originPath, to: destinationPath)
+//    }
+//
+//    func delete(document: Document, at indexPath: IndexPath? = nil) {
+//        do {
+//            try FileManager.default.removeItem(at: document.url)
+//
+//            if let indexPath = indexPath {
+//                documents.remove(at: indexPath.row)
+//                tableView.deleteRows(at: [indexPath], with: .left)
+//            }
+//        } catch let error {
+//            let alert = UIAlertController(title: "Erreur", message: "Impossible de supprimer le document, une erreur est survenu : \(error.localizedDescription)", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
 }
 
 extension DocumentsViewController: UITableViewDataSource {
@@ -117,50 +120,50 @@ extension DocumentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documents.count
+        return musics.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        cell.textLabel?.text = documents[indexPath.row].name
+        cell.textLabel?.text = musics[indexPath.row].name
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
-            let document = self.documents[indexPath.row]
-            
-            let alert = UIAlertController(title: "Renommer le morceau", message: "Entrez le nom du morceau ci dessous : ", preferredStyle: .alert)
-            alert.addTextField(configurationHandler: { (textField) in
-                textField.text = document.name
-            })
-            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
-                guard let newName = alert.textFields?.first?.text else {
-                    return
-                }
-                self.rename(document: document, by: newName)
-                self.loadDocument()
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
-            let document = self.documents[indexPath.row]
-            
-            let alert = UIAlertController(title: "Supprimer le document", message: "Voulez-vous vraiment supprimer le document \(document.name) ?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
-                self.delete(document: document, at: indexPath)
-            }))
-            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
-            
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        return [rename, delete]
-    }
+//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
+//            let document = self.documents[indexPath.row]
+//
+//            let alert = UIAlertController(title: "Renommer le morceau", message: "Entrez le nom du morceau ci dessous : ", preferredStyle: .alert)
+//            alert.addTextField(configurationHandler: { (textField) in
+//                textField.text = document.name
+//            })
+//            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
+//            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
+//                guard let newName = alert.textFields?.first?.text else {
+//                    return
+//                }
+//                self.rename(document: document, by: newName)
+//                self.loadDocument()
+//            }))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//
+//        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
+//            let document = self.documents[indexPath.row]
+//
+//            let alert = UIAlertController(title: "Supprimer le document", message: "Voulez-vous vraiment supprimer le document \(document.name) ?", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
+//                self.delete(document: document, at: indexPath)
+//            }))
+//            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
+//
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//
+//        return [rename, delete]
+//    }
 }
 
 extension DocumentsViewController: UITableViewDelegate {
@@ -205,22 +208,40 @@ extension DocumentsViewController: UIDocumentPickerDelegate {
     }
     
     func importDocumentAt(url: URL) {
-        let _ = url.startAccessingSecurityScopedResource()
+        let isSecured = url.startAccessingSecurityScopedResource()
         let coordinator = NSFileCoordinator()
         var error: NSError? = nil
-        coordinator.coordinate(readingItemAt: url, options: [], error: &error) { (url) in
-            let newDocumentURL = self.repertoryDirectoryPath().appendingPathComponent(url.lastPathComponent)
+        coordinator.coordinate(readingItemAt: url, options: [.forUploading], error: &error) { (url) in
+            
             do {
-                try FileManager.default.copyItem(at: url, to: newDocumentURL)
-            } catch let copyError {
-                Log("An error occured trying to copy file from document picker view controller to local repertory! \(copyError.localizedDescription)")
-                let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
+                let data = try Data(contentsOf: url)
+                guard let music = repertoryService?.create(pdfMusicWithName: url.lastPathComponent, andPdfFile: data, in: self.repertory) else {
+                    Log("An error occured trying to copy file from document picker view controller to local repertory!")
+                    let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    return
+                }
+                
+//                let _ = repertoryService?.insert(music: music, in: repertory)
+                self.loadDocument()
+            }
+            catch let error {
+                Log("An error occured trying to copy file from document picker view controller to local repertory! \(error.localizedDescription)")
+                let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu... \(error.localizedDescription)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            self.loadDocument()
+            
+            
         }
-        url.stopAccessingSecurityScopedResource()
+        if let error = error {
+            let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu... \(error.localizedDescription)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        if isSecured { url.stopAccessingSecurityScopedResource() }
     }
     
 }
