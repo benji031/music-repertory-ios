@@ -72,30 +72,19 @@ class DocumentsViewController: UIViewController {
         present(documentPicker, animated: true, completion: nil)
     }
     
-//    func rename(document: Document, by newName: String) {
-//        guard !newName.isEmpty else {
-//            return
-//        }
-//
-//        let originPath = document.url
-//        let destinationPath = originPath.deletingLastPathComponent().appendingPathComponent(newName).appendingPathExtension("pdf")
-//        try? FileManager.default.moveItem(at: originPath, to: destinationPath)
-//    }
-//
-//    func delete(document: Document, at indexPath: IndexPath? = nil) {
-//        do {
-//            try FileManager.default.removeItem(at: document.url)
-//
-//            if let indexPath = indexPath {
-//                documents.remove(at: indexPath.row)
-//                tableView.deleteRows(at: [indexPath], with: .left)
-//            }
-//        } catch let error {
-//            let alert = UIAlertController(title: "Erreur", message: "Impossible de supprimer le document, une erreur est survenu : \(error.localizedDescription)", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
+    func rename(music: Music, by newName: String) {
+        music.name = newName
+        
+    }
+
+    func delete(music: Music, at indexPath: IndexPath? = nil) {
+        repertoryService?.remove(music, from: repertory)
+
+        if let indexPath = indexPath {
+            musics.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
+    }
 }
 
 extension DocumentsViewController: UITableViewDataSource {
@@ -116,39 +105,39 @@ extension DocumentsViewController: UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
-//            let document = self.documents[indexPath.row]
-//
-//            let alert = UIAlertController(title: "Renommer le morceau", message: "Entrez le nom du morceau ci dessous : ", preferredStyle: .alert)
-//            alert.addTextField(configurationHandler: { (textField) in
-//                textField.text = document.name
-//            })
-//            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
-//            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
-//                guard let newName = alert.textFields?.first?.text else {
-//                    return
-//                }
-//                self.rename(document: document, by: newName)
-//                self.loadDocument()
-//            }))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
-//            let document = self.documents[indexPath.row]
-//
-//            let alert = UIAlertController(title: "Supprimer le document", message: "Voulez-vous vraiment supprimer le document \(document.name) ?", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
-//                self.delete(document: document, at: indexPath)
-//            }))
-//            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
-//
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//
-//        return [rename, delete]
-//    }
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
+            let music = self.musics[indexPath.row]
+
+            let alert = UIAlertController(title: "Renommer le morceau", message: "Entrez le nom du morceau ci dessous : ", preferredStyle: .alert)
+            alert.addTextField(configurationHandler: { (textField) in
+                textField.text = music.name
+            })
+            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
+                guard let newName = alert.textFields?.first?.text else {
+                    return
+                }
+                self.rename(music: music, by: newName)
+                self.loadDocument()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
+            let music = self.musics[indexPath.row]
+
+            let alert = UIAlertController(title: "Supprimer le document", message: "Voulez-vous vraiment supprimer le document \(music.name ?? "") ?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
+                self.delete(music: music, at: indexPath)
+            }))
+            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        return [rename, delete]
+    }
 }
 
 extension DocumentsViewController: UITableViewDelegate {

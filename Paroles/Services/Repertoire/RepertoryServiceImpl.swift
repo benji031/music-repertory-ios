@@ -95,4 +95,20 @@ class RepertoryServiceImpl: RepertoryService {
         }
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(filename)
     }
+    
+    func remove(_ music: Music, from repertory: Repertory) {
+        guard let repertoryMusic = repertory.musics?.first(where: { ($0 as! RepertoryMusic).music == music }) as? RepertoryMusic else {
+            return
+        }
+        
+        repertory.removeFromMusics(repertoryMusic)
+        
+        dataService?.save(repertoryMusic)
+        dataService?.delete(repertoryMusic)
+    }
+
+    func save(_ music: Music) -> Music? {
+        dataService?.save(music)
+        return music
+    }
 }
