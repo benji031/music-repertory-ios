@@ -18,6 +18,7 @@
 		4330C01C20AB59AD00C74108 /* RepertoryServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01B20AB59AD00C74108 /* RepertoryServiceImpl.swift */; };
 		4330C01E20AB5C6B00C74108 /* ServicesRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */; };
 		4330C02020AB5D5A00C74108 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01F20AB5D5A00C74108 /* Log.swift */; };
+		4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
 		43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */; };
@@ -27,6 +28,7 @@
 		43AD1D9220B8524F00C92526 /* TiledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8B20B8524F00C92526 /* TiledView.swift */; };
 		43AD1D9320B8524F00C92526 /* PDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8C20B8524F00C92526 /* PDFDocument.swift */; };
 		43AD1D9520B8526900C92526 /* PDFReader.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43AD1D9420B8526900C92526 /* PDFReader.storyboard */; };
+		43C55DE621B2EF9F00E52CD2 /* MusicViewControllable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */; };
 		43CCFAFD20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFAFB20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift */; };
 		43CCFAFE20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43CCFAFC20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift */; };
 		43E110F720C80721006313BA /* ColoredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E110F620C80721006313BA /* ColoredButton.swift */; };
@@ -50,6 +52,7 @@
 		4330C01B20AB59AD00C74108 /* RepertoryServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoryServiceImpl.swift; sourceTree = "<group>"; };
 		4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesRegistry.swift; sourceTree = "<group>"; };
 		4330C01F20AB5D5A00C74108 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewerViewController.swift; sourceTree = "<group>"; };
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +63,7 @@
 		43AD1D8B20B8524F00C92526 /* TiledView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TiledView.swift; sourceTree = "<group>"; };
 		43AD1D8C20B8524F00C92526 /* PDFDocument.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFDocument.swift; sourceTree = "<group>"; };
 		43AD1D9420B8526900C92526 /* PDFReader.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PDFReader.storyboard; sourceTree = "<group>"; };
+		43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewControllable.swift; sourceTree = "<group>"; };
 		43CCFAFB20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFMusic+CoreDataClass.swift"; sourceTree = "<group>"; };
 		43CCFAFC20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PDFMusic+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		43E110F620C80721006313BA /* ColoredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoredButton.swift; sourceTree = "<group>"; };
@@ -112,8 +116,10 @@
 				4330C00320AB54EE00C74108 /* LaunchScreen.storyboard */,
 				4330C00620AB54EE00C74108 /* Info.plist */,
 				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
+				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
 				43E110F620C80721006313BA /* ColoredButton.swift */,
 				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
+				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
@@ -348,9 +354,11 @@
 				4330C01320AB585100C74108 /* DataService.swift in Sources */,
 				43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */,
 				43E110F920C80EA1006313BA /* RepertoriesViewController.swift in Sources */,
+				43C55DE621B2EF9F00E52CD2 /* MusicViewControllable.swift in Sources */,
 				43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */,
 				4330C01C20AB59AD00C74108 /* RepertoryServiceImpl.swift in Sources */,
 				4330BFF920AB54EE00C74108 /* AppDelegate.swift in Sources */,
+				4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */,
 				43AD1D9220B8524F00C92526 /* TiledView.swift in Sources */,
 				43CCFAFD20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift in Sources */,
 			);

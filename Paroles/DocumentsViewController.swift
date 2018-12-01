@@ -35,25 +35,9 @@ class DocumentsViewController: UIViewController {
         
         self.loadDocument()
     }
-
-//    func repertoryDirectoryPath() -> URL {
-//        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(directory, isDirectory: true)
-//    }
     
     @objc func loadDocument() {
-        
         musics = repertoryService?.get(musicsFor: repertory) ?? [Music]()
-//        let documentsURL = repertoryDirectoryPath()
-//        do {
-//            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
-//            documents = fileURLs.compactMap({ (url) -> (url: URL, name: String)? in
-//                return url.pathExtension == "pdf" ? (url: url, name: url.deletingPathExtension().lastPathComponent) : nil
-//            })
-//
-//            tableView.reloadData()
-//        } catch {
-//            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
-//        }
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -72,8 +56,9 @@ class DocumentsViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if segue.identifier == "DocumentSegue" {
-//            let destination = segue.destination as! PDFViewController
-//            destination.documents = documents
+            let destination = segue.destination as! DocumentViewerViewController
+            destination.repertory = repertory
+            destination.currentMusic = musics[sender as! Int]
 //            destination.selectedDocument = sender as! Int
 //            destination.isThumbnailsEnabled = true
         }

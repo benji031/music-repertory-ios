@@ -23,5 +23,12 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(DocumentsViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
         }
+        defaultContainer.storyboardInitCompleted(PDFViewController.self) { (r, c) in
+            c.repertoryService = r.resolve(RepertoryService.self)
+        }
+        
+        defaultContainer.storyboardInitCompleted(DocumentViewerViewController.self) { (r, c) in
+            c.repertoryService = r.resolve(RepertoryService.self)
+        }
     }
 }

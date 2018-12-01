@@ -14,7 +14,13 @@ protocol RepertoryService {
     func getRepertories() -> [Repertory]
     
     func create(pdfMusicWithName name: String, andPdfFile pdfFile: Data, in repertory: Repertory) -> PDFMusic?
+
+    func getDocumentURL(for music: PDFMusic) -> URL?
+    
 //    func insert(music: Music, in repertory: Repertory) -> Repertory
     
     func get(musicsFor repertory: Repertory) -> [Music]
+    
+    func get(previousMusic music: Music, on repertory: Repertory) -> Music?
+    func get(nextMusic music: Music, on repertory: Repertory) -> Music?
 }

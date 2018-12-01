@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum Direction {
-    case previous
-    case next
-}
-
 extension PDFViewController {
     /// Initializes a new `PDFViewController`
     ///
@@ -57,8 +52,8 @@ extension PDFViewController {
         let document = PDFDocument(fileData: data, fileName: documents[selectedDocument].name)
         
         let controller = createNew(with: document!)
-        controller.selectedDocument = selectedDocument
-        controller.documents = documents
+//        controller.selectedDocument = selectedDocument
+//        controller.documents = documents
         
         return controller
     }
@@ -117,8 +112,10 @@ public final class PDFViewController: UIViewController {
         }
     }
     
-    var selectedDocument = 0
-    var documents = [Document]()
+    var repertory: Repertory!
+    var music: Music!
+    
+    var repertoryService: RepertoryService?
     
     /// Whether or not the thumbnails bar should be enabled
     var isThumbnailsEnabled = true {
@@ -150,9 +147,6 @@ public final class PDFViewController: UIViewController {
         collectionView.backgroundColor = backgroundColor
         collectionView.register(PDFPageCollectionViewCell.self, forCellWithReuseIdentifier: "page")
         
-        
-        loadPDF()
-        
         let nextTouchView = UIView()
         nextTouchView.backgroundColor = UIColor.clear
         nextTouchView.translatesAutoresizingMaskIntoConstraints = false
@@ -182,33 +176,7 @@ public final class PDFViewController: UIViewController {
     
     func loadPDF(to direction: Direction? = nil) {
         
-        if let direction = direction {
-            switch direction {
-            case .next:
-                selectedDocument = selectedDocument == (documents.count - 1) ? selectedDocument : selectedDocument + 1
-                break
-            case .previous:
-                selectedDocument = selectedDocument - 1 >= 0 ? selectedDocument - 1 : 0
-                break
-            }
-        }
-        
-        guard documents.count > 0 else {
-            return
-        }
-        
-        let data = try! Data(contentsOf: documents[selectedDocument].url)
-        document = PDFDocument(fileData: data, fileName: documents[selectedDocument].name)
-        currentPageIndex = 0
-        
-        let numberOfPages = CGFloat(document.pageCount)
-        let cellSpacing = CGFloat(2.0)
-        let totalSpacing = (numberOfPages - 1.0) * cellSpacing
-        let thumbnailWidth = (numberOfPages * PDFThumbnailCell.cellSize.width) + totalSpacing
-        let width = min(thumbnailWidth, view.bounds.width)
-        thumbnailCollectionControllerWidth.constant = width
-        thumbnailCollectionController?.currentPageIndex = 0
-        thumbnailCollectionController?.document = document
+    
         
         title = document.fileName
         
@@ -374,4 +342,33 @@ extension PDFViewController: UIScrollViewDelegate {
             thumbnailCollectionController?.currentPageIndex = currentPageIndex
         }
     }
+}
+
+
+extension PDFViewController: MusicViewControllable {
+    
+    func has(_ direction: Direction) -> Bool {
+        switch direction {
+        case .next:
+            return currentPageIndex < (document.pageCount - 1)
+        case .previous:
+            return currentPageIndex > 0
+        }
+    }
+    
+    func go(to direction: Direction) {
+        switch direction {
+        case .next:
+            guard has(.next) else { return }
+            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex + 1, section: 0), at: .left, animated: true)
+            thumbnailCollectionController?.currentPageIndex = currentPageIndex
+            break
+        case .previous:
+            guard has(.previous) else { return }
+            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex - 1, section: 0), at: .left, animated: true)
+            thumbnailCollectionController?.currentPageIndex = currentPageIndex
+            break
+        }
+    }
+    
 }

@@ -13,6 +13,15 @@ let kBaseRepertoryDirectory = "repertory"
 
 class RepertoryServiceImpl: RepertoryService {
     
+    func get(previousMusic music: Music, on repertory: Repertory) -> Music? {
+        return nil
+    }
+    
+    func get(nextMusic music: Music, on repertory: Repertory) -> Music? {
+        return nil
+    }
+    
+    
     
     let dataService: DataService?
     
@@ -44,8 +53,10 @@ class RepertoryServiceImpl: RepertoryService {
         }
         
         let fileName = UUID().uuidString
-        let newURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(fileName)
-        try? pdfFile.write(to: newURL)
+        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true)
+        try! FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+        let newURL = directory.appendingPathComponent(fileName)
+        try! pdfFile.write(to: newURL)
         
         music.name = name
         music.documentPath = fileName
@@ -76,5 +87,12 @@ class RepertoryServiceImpl: RepertoryService {
     
     func get(musicsFor repertory: Repertory) -> [Music] {
         return (repertory.musics?.compactMap({($0 as! RepertoryMusic).music })) ?? [Music]()
+    }
+    
+    func getDocumentURL(for music: PDFMusic) -> URL? {
+        guard let filename = music.documentPath else {
+            return nil
+        }
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(filename)
     }
 }
