@@ -21,9 +21,6 @@ protocol RepertoryService {
     
     func get(musicsFor repertory: Repertory) -> [Music]
     
-    func get(previousMusic music: Music, on repertory: Repertory) -> Music?
-    func get(nextMusic music: Music, on repertory: Repertory) -> Music?
-    
     func remove(_ music: Music, from repertory: Repertory)
 
     func save(_ music: Music) -> Music?

@@ -57,10 +57,9 @@ class DocumentsViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "DocumentSegue" {
             let destination = segue.destination as! DocumentViewerViewController
+            destination.allMusics = musics
             destination.repertory = repertory
             destination.currentMusic = musics[sender as! Int]
-//            destination.selectedDocument = sender as! Int
-//            destination.isThumbnailsEnabled = true
         }
     }
  

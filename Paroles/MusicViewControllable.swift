@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bananapps. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Direction {
     case next

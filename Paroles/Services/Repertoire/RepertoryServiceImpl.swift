@@ -13,16 +13,6 @@ let kBaseRepertoryDirectory = "repertory"
 
 class RepertoryServiceImpl: RepertoryService {
     
-    func get(previousMusic music: Music, on repertory: Repertory) -> Music? {
-        return nil
-    }
-    
-    func get(nextMusic music: Music, on repertory: Repertory) -> Music? {
-        return nil
-    }
-    
-    
-    
     let dataService: DataService?
     
     init(with dataService: DataService?) {

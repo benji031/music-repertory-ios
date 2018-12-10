@@ -13,6 +13,7 @@ class DocumentViewerViewController: UIViewController {
     @IBOutlet weak var previousView: UIView!
     @IBOutlet weak var nextView: UIView!
     
+    var allMusics: [Music] = [Music]()
     var currentMusic: Music!
     var repertory: Repertory!
     
@@ -34,17 +35,28 @@ class DocumentViewerViewController: UIViewController {
             return
         }
         
-        switch currentMusic {
+        display(currentMusic)
+    }
+    
+    func display(_ music: Music) {
+        
+        if let currentMusicController = currentMusicController as? UIViewController {
+            currentMusicController.view.removeFromSuperview()
+            currentMusicController.removeFromParentViewController()
+            currentMusicController.willMove(toParentViewController: nil)
+        }
+        
+        switch music {
         case is PDFMusic:
             
             Log("This is pdf")
             
-            guard let documentUrl = repertoryService?.getDocumentURL(for: currentMusic as! PDFMusic) else {
+            guard let documentUrl = repertoryService?.getDocumentURL(for: music as! PDFMusic) else {
                 return
             }
             
             let data = try! Data(contentsOf: documentUrl)
-            guard let document = PDFDocument(fileData: data, fileName: currentMusic.name ?? "") else {
+            guard let document = PDFDocument(fileData: data, fileName: music.name ?? "") else {
                 return
             }
             
@@ -88,7 +100,13 @@ class DocumentViewerViewController: UIViewController {
             currentMusicController?.go(to: .next)
         }
         else {
-            // Go to next music
+            guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
+                return
+            }
+            guard let nextIndex = allMusics.index(currentIndex, offsetBy: 1, limitedBy: allMusics.count - 1) else {
+                return
+            }
+            display(allMusics[nextIndex])
         }
     }
     
