@@ -21,6 +21,7 @@
 		4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
 		438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */; };
+		438B2ADB21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
 		43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */; };
 		43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8820B8524F00C92526 /* PDFPageView.swift */; };
@@ -57,6 +58,7 @@
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
 		438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoryMusicTableViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
 		43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8820B8524F00C92526 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
@@ -111,30 +113,28 @@
 				43AD1D8520B8522D00C92526 /* PDFViewer */,
 				4353358120B4B41400F6C7D3 /* Paroles.entitlements */,
 				4330C01420AB586200C74108 /* Resources */,
-				4330C00E20AB583800C74108 /* Services */,
+				4330C00E20AB583800C74108 /* services */,
 				4330BFF820AB54EE00C74108 /* AppDelegate.swift */,
 				4330BFFE20AB54EE00C74108 /* Main.storyboard */,
 				4330C00120AB54EE00C74108 /* Assets.xcassets */,
 				4330C00320AB54EE00C74108 /* LaunchScreen.storyboard */,
 				4330C00620AB54EE00C74108 /* Info.plist */,
-				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
-				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
 				43E110F620C80721006313BA /* ColoredButton.swift */,
-				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
+				438B2AD921D91A5E000A8FEF /* views */,
+				438B2AD821D916B6000A8FEF /* controllers */,
 				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
-				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
 		};
-		4330C00E20AB583800C74108 /* Services */ = {
+		4330C00E20AB583800C74108 /* services */ = {
 			isa = PBXGroup;
 			children = (
 				4330C01820AB596B00C74108 /* Repertoire */,
 				4330C00F20AB583E00C74108 /* Data */,
 				4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */,
 			);
-			path = Services;
+			path = services;
 			sourceTree = "<group>";
 		};
 		4330C00F20AB583E00C74108 /* Data */ = {
@@ -178,6 +178,25 @@
 				43CCFAFC20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		438B2AD821D916B6000A8FEF /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
+				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
+				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
+				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
+			);
+			path = controllers;
+			sourceTree = "<group>";
+		};
+		438B2AD921D91A5E000A8FEF /* views */ = {
+			isa = PBXGroup;
+			children = (
+				438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */,
+			);
+			path = views;
 			sourceTree = "<group>";
 		};
 		43AD1D8520B8522D00C92526 /* PDFViewer */ = {
@@ -346,6 +365,7 @@
 				43AD1D9120B8524F00C92526 /* PDFThumbnailCell.swift in Sources */,
 				4330C02020AB5D5A00C74108 /* Log.swift in Sources */,
 				43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */,
+				438B2ADB21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift in Sources */,
 				43E110F720C80721006313BA /* ColoredButton.swift in Sources */,
 				4330C01220AB585100C74108 /* CoreDataService.swift in Sources */,
 				4330C01720AB587B00C74108 /* Model.xcdatamodeld in Sources */,

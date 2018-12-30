@@ -98,6 +98,7 @@ class DocumentsViewController: UIViewController {
             editButton.title = "Edit"
             addButton.isEnabled = true
             repertoryService?.saveOrder(musics, in: repertory)
+            loadDocument()
         }
         else
         {
@@ -144,9 +145,9 @@ extension DocumentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath) as! RepertoryMusicTableViewCell
         
-        cell.textLabel?.text = musics[indexPath.row].music?.name
+        cell.repertoryMusic = musics[indexPath.row]
         
         return cell
     }
