@@ -36,6 +36,12 @@ class DocumentsViewController: UIViewController {
         self.loadDocument()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.loadDocument()
+    }
+    
     @objc func loadDocument() {
         musics = repertoryService?.get(musicsFor: repertory) ?? [Music]()
         tableView.reloadData()
@@ -61,14 +67,22 @@ class DocumentsViewController: UIViewController {
             destination.repertory = repertory
             destination.currentMusic = musics[sender as! Int]
         }
+        if segue.identifier == "LibrarySegue" {
+            let destination = segue.destination as! LibraryViewController
+            destination.repertoryImport = repertory
+        }
     }
  
     @IBAction func addDocumentButtonDidTouch(_ sender: Any) {
-        let documentPicker = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
-        documentPicker.modalPresentationStyle = .formSheet
-        documentPicker.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
+        let actionSheet = UIAlertController(title: "Ajouter un morceau", message: nil, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Bibliothèque", style: .default, handler: { (_) in
+            self.performSegue(withIdentifier: "LibrarySegue", sender: self)
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Importer", style: .default, handler: { (_) in
+            self.importDocument()
+        }))
+        actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(actionSheet, animated: true, completion: nil)
     }
     
     func rename(music: Music, by newName: String) {
@@ -83,6 +97,14 @@ class DocumentsViewController: UIViewController {
             musics.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .left)
         }
+    }
+    
+    func importDocument() {
+        let documentPicker = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
+        documentPicker.modalPresentationStyle = .formSheet
+        documentPicker.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
     }
 }
 

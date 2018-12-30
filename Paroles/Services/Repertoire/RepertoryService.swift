@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 protocol RepertoryService {
     
@@ -17,10 +18,12 @@ protocol RepertoryService {
 
     func getDocumentURL(for music: PDFMusic) -> URL?
     
-//    func insert(music: Music, in repertory: Repertory) -> Repertory
+
     
+    func getMusics(in context: NSManagedObjectContext) -> [Music]
     func get(musicsFor repertory: Repertory) -> [Music]
     
+    func add(_ music: Music, to repertory: Repertory)
     func remove(_ music: Music, from repertory: Repertory)
 
     func save(_ music: Music) -> Music?

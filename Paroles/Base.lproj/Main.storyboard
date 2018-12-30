@@ -263,6 +263,7 @@
                     <connections>
                         <outlet property="tableView" destination="aeU-Ry-AB8" id="JiY-Jy-H7V"/>
                         <segue destination="1Ac-Vc-Q7P" kind="show" identifier="DocumentSegue" id="9Zu-Ev-d98"/>
+                        <segue destination="Uav-gF-CSy" kind="show" identifier="LibrarySegue" id="rqt-xb-O7P"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUe-HF-MBJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -413,6 +414,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xb6-kE-dXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="95" y="1513"/>
+        </scene>
+        <!--Bibliothèque-->
+        <scene sceneID="7zO-dG-1mR">
+            <objects>
+                <viewController id="Uav-gF-CSy" customClass="LibraryViewController" customModule="Paroles" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="78w-sn-YEq">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="954"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zYV-Pz-CEd">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="954"/>
+                                <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MusicCell" textLabel="YY0-CI-XdF" style="IBUITableViewCellStyleDefault" id="Qgq-XP-ad2">
+                                        <rect key="frame" x="0.0" y="55.5" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Qgq-XP-ad2" id="s6e-OE-DwI">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YY0-CI-XdF">
+                                                    <rect key="frame" x="15" y="0.0" width="738" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="zYV-Pz-CEd" firstAttribute="trailing" secondItem="Nwi-pO-9Ri" secondAttribute="trailing" id="47i-X1-0R1"/>
+                            <constraint firstItem="zYV-Pz-CEd" firstAttribute="leading" secondItem="Nwi-pO-9Ri" secondAttribute="leading" id="Ijg-1U-baL"/>
+                            <constraint firstItem="zYV-Pz-CEd" firstAttribute="bottom" secondItem="Nwi-pO-9Ri" secondAttribute="bottom" id="Okr-h0-gyB"/>
+                            <constraint firstItem="zYV-Pz-CEd" firstAttribute="top" secondItem="Nwi-pO-9Ri" secondAttribute="top" id="x0V-SK-zbm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Nwi-pO-9Ri"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Bibliothèque" id="8f1-le-HvU">
+                        <barButtonItem key="backBarButtonItem" title=" " id="y2N-Da-v66"/>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="done" id="Afv-JA-4lZ">
+                                <connections>
+                                    <action selector="doneButtonDidTouch:" destination="Uav-gF-CSy" id="CSC-sN-mCM"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="eLP-Qi-pZb">
+                                <connections>
+                                    <action selector="addButtonDidTouch:" destination="Uav-gF-CSy" id="xA6-rq-CMD"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="zYV-Pz-CEd" id="IOq-iX-O6f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uds-Mx-5Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1494" y="2146"/>
         </scene>
     </scenes>
 </document>

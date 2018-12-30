@@ -30,5 +30,9 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(DocumentViewerViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
         }
+        
+        defaultContainer.storyboardInitCompleted(LibraryViewController.self) { (r, c) in
+            c.repertoryService = r.resolve(RepertoryService.self)
+        }
     }
 }

@@ -20,6 +20,7 @@
 		4330C02020AB5D5A00C74108 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01F20AB5D5A00C74108 /* Log.swift */; };
 		4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
+		438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
 		43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */; };
 		43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8820B8524F00C92526 /* PDFPageView.swift */; };
@@ -55,6 +56,7 @@
 		4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewerViewController.swift; sourceTree = "<group>"; };
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
+		438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
 		43AD1D8720B8524F00C92526 /* PDFPageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8820B8524F00C92526 /* PDFPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPageView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				43E110F620C80721006313BA /* ColoredButton.swift */,
 				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
 				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
+				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */,
 				43AD1D9120B8524F00C92526 /* PDFThumbnailCell.swift in Sources */,
 				4330C02020AB5D5A00C74108 /* Log.swift in Sources */,
 				43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */,

@@ -75,6 +75,11 @@ class RepertoryServiceImpl: RepertoryService {
         return repertory
     }
     
+    func getMusics(in context: NSManagedObjectContext) -> [Music] {
+        let request: NSFetchRequest<Music> = Music.fetchRequest()
+        return dataService?.fetchObjects(request: request, on: context) ?? []
+    }
+    
     func get(musicsFor repertory: Repertory) -> [Music] {
         return (repertory.musics?.compactMap({($0 as! RepertoryMusic).music })) ?? [Music]()
     }
@@ -84,6 +89,10 @@ class RepertoryServiceImpl: RepertoryService {
             return nil
         }
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(filename)
+    }
+    
+    func add(_ music: Music, to repertory: Repertory) {
+        let _ = insert(music: music, in: repertory)
     }
     
     func remove(_ music: Music, from repertory: Repertory) {
