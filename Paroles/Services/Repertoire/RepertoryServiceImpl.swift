@@ -80,8 +80,10 @@ class RepertoryServiceImpl: RepertoryService {
         return dataService?.fetchObjects(request: request, on: context) ?? []
     }
     
-    func get(musicsFor repertory: Repertory) -> [Music] {
-        return (repertory.musics?.compactMap({($0 as! RepertoryMusic).music })) ?? [Music]()
+    func get(musicsFor repertory: Repertory) -> [RepertoryMusic] {
+        return (repertory.musics?
+            .compactMap({($0 as! RepertoryMusic) })
+            .sorted(by: { $0.index < $1.index })) ?? [RepertoryMusic]()
     }
     
     func getDocumentURL(for music: PDFMusic) -> URL? {
@@ -106,6 +108,13 @@ class RepertoryServiceImpl: RepertoryService {
         dataService?.delete(repertoryMusic)
     }
 
+    func saveOrder(_ repertoryMusics: [RepertoryMusic], in repertory: Repertory) {
+        for (i, repertoryMusic) in repertoryMusics.enumerated() {
+            repertoryMusic.index = Int32(i)
+            dataService?.save(repertoryMusic)
+        }
+    }
+    
     func save(_ music: Music) -> Music? {
         dataService?.save(music)
         return music

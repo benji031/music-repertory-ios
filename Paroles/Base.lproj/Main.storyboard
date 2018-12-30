@@ -254,13 +254,22 @@
                     </view>
                     <navigationItem key="navigationItem" title="Repertoire" id="Pcc-vm-nYj">
                         <barButtonItem key="backBarButtonItem" title=" " id="RCv-VE-s18"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="aM0-8w-AeZ">
-                            <connections>
-                                <action selector="addDocumentButtonDidTouch:" destination="Kki-Xp-Itm" id="G4i-aQ-1xW"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="aM0-8w-AeZ">
+                                <connections>
+                                    <action selector="addDocumentButtonDidTouch:" destination="Kki-Xp-Itm" id="G4i-aQ-1xW"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="7OB-uZ-DKO">
+                                <connections>
+                                    <action selector="editButtonDidTouched:" destination="Kki-Xp-Itm" id="TOm-mb-ZDS"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="aM0-8w-AeZ" id="lT6-7b-T5t"/>
+                        <outlet property="editButton" destination="7OB-uZ-DKO" id="ces-eV-aRD"/>
                         <outlet property="tableView" destination="aeU-Ry-AB8" id="JiY-Jy-H7V"/>
                         <segue destination="1Ac-Vc-Q7P" kind="show" identifier="DocumentSegue" id="9Zu-Ev-d98"/>
                         <segue destination="Uav-gF-CSy" kind="show" identifier="LibrarySegue" id="rqt-xb-O7P"/>

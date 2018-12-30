@@ -21,10 +21,11 @@ protocol RepertoryService {
 
     
     func getMusics(in context: NSManagedObjectContext) -> [Music]
-    func get(musicsFor repertory: Repertory) -> [Music]
+    func get(musicsFor repertory: Repertory) -> [RepertoryMusic]
     
     func add(_ music: Music, to repertory: Repertory)
     func remove(_ music: Music, from repertory: Repertory)
-
+    func saveOrder(_ repertoryMusics: [RepertoryMusic], in repertory: Repertory)
+    
     func save(_ music: Music) -> Music?
 }

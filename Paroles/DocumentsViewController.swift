@@ -16,6 +16,9 @@ class DocumentsViewController: UIViewController {
     var repertoryService: RepertoryService?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
+    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(loadDocument), for: UIControlEvents.valueChanged)
@@ -24,11 +27,13 @@ class DocumentsViewController: UIViewController {
     }()
     
     var repertory: Repertory!
-    var musics = [Music]()
+    var musics = [RepertoryMusic]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = repertory.name
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.addSubview(refreshControl)
@@ -43,7 +48,7 @@ class DocumentsViewController: UIViewController {
     }
     
     @objc func loadDocument() {
-        musics = repertoryService?.get(musicsFor: repertory) ?? [Music]()
+        musics = repertoryService?.get(musicsFor: repertory) ?? [RepertoryMusic]()
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
@@ -63,9 +68,9 @@ class DocumentsViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if segue.identifier == "DocumentSegue" {
             let destination = segue.destination as! DocumentViewerViewController
-            destination.allMusics = musics
+            destination.allMusics = musics.compactMap({ $0.music })
             destination.repertory = repertory
-            destination.currentMusic = musics[sender as! Int]
+            destination.currentMusic = musics[sender as! Int].music
         }
         if segue.identifier == "LibrarySegue" {
             let destination = segue.destination as! LibraryViewController
@@ -84,6 +89,26 @@ class DocumentsViewController: UIViewController {
         actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(actionSheet, animated: true, completion: nil)
     }
+    
+    @IBAction func editButtonDidTouched(_ sender: Any) {
+        if(tableView.isEditing == true)
+        {
+            tableView.setEditing(false, animated: true)
+            editButton.style = .plain
+            editButton.title = "Edit"
+            addButton.isEnabled = true
+            repertoryService?.saveOrder(musics, in: repertory)
+        }
+        else
+        {
+            tableView.setEditing(true, animated: true)
+            editButton.style = .done
+            editButton.title = "Done"
+            addButton.isEnabled = false
+        }
+    }
+    
+    
     
     func rename(music: Music, by newName: String) {
         music.name = newName
@@ -121,14 +146,16 @@ extension DocumentsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        cell.textLabel?.text = musics[indexPath.row].name
+        cell.textLabel?.text = musics[indexPath.row].music?.name
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
-            let music = self.musics[indexPath.row]
+            guard let music = self.musics[indexPath.row].music else {
+                return
+            }
 
             let alert = UIAlertController(title: "Renommer le morceau", message: "Entrez le nom du morceau ci dessous : ", preferredStyle: .alert)
             alert.addTextField(configurationHandler: { (textField) in
@@ -146,7 +173,9 @@ extension DocumentsViewController: UITableViewDataSource {
         }
 
         let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
-            let music = self.musics[indexPath.row]
+            guard let music = self.musics[indexPath.row].music else {
+                return
+            }
 
             let alert = UIAlertController(title: "Supprimer le document", message: "Voulez-vous vraiment supprimer le document \(music.name ?? "") ?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
@@ -159,6 +188,20 @@ extension DocumentsViewController: UITableViewDataSource {
 
         return [rename, delete]
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let musicMoved = musics[sourceIndexPath.row]
+        musics.remove(at: sourceIndexPath.row)
+        musics.insert(musicMoved, at: destinationIndexPath.row)
+    }
 }
 
 extension DocumentsViewController: UITableViewDelegate {
@@ -167,7 +210,7 @@ extension DocumentsViewController: UITableViewDelegate {
         performSegue(withIdentifier: "DocumentSegue", sender: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
+
 }
 
 extension DocumentsViewController: UIDocumentMenuDelegate {
