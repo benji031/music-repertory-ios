@@ -13,8 +13,16 @@ enum Direction {
     case previous
 }
 
+enum Position {
+    case start
+    case page(index: Int)
+    case end
+}
+
 protocol MusicViewControllable {
     
     func has(_ direction: Direction) -> Bool
     func go(to direction: Direction)
+    func go(at position: Position, animated: Bool)
+    
 }

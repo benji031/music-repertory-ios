@@ -365,10 +365,28 @@ extension PDFViewController: MusicViewControllable {
             break
         case .previous:
             guard has(.previous) else { return }
-            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex - 1, section: 0), at: .left, animated: true)
+            collectionView.scrollToItem(at: IndexPath(row: currentPageIndex - 1, section: 0), at: .right, animated: true)
             thumbnailCollectionController?.currentPageIndex = currentPageIndex
             break
         }
+    }
+    
+    func go(at position: Position, animated: Bool) {
+        let newPosition: Int
+        switch position {
+        case .start:
+            newPosition = 0
+            break
+        case .page(index: let i):
+            newPosition = min(i, document.pageCount - 1)
+            break
+        case .end:
+            newPosition = document.pageCount - 1
+            break
+        }
+        
+        collectionView.scrollToItem(at: IndexPath(row: newPosition, section: 0), at: .left, animated: animated)
+        thumbnailCollectionController?.currentPageIndex = 0
     }
     
 }

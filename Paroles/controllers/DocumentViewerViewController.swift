@@ -38,7 +38,7 @@ class DocumentViewerViewController: UIViewController {
         display(currentMusic)
     }
     
-    func display(_ music: Music) {
+    func display(_ music: Music, at position: Position = .start) {
         
         if let currentMusicController = currentMusicController as? UIViewController {
             currentMusicController.view.removeFromSuperview()
@@ -71,6 +71,9 @@ class DocumentViewerViewController: UIViewController {
         default:
             break
         }
+        
+        currentMusic = music
+        currentMusicController?.go(at: position, animated: false)
     }
     
     func displayMusicViewer(_ view: UIView) {
@@ -115,7 +118,13 @@ class DocumentViewerViewController: UIViewController {
             currentMusicController?.go(to: .previous)
         }
         else {
-            // Go to previous music
+            guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
+                return
+            }
+            guard let prevIndex = allMusics.index(currentIndex, offsetBy: -1, limitedBy: 0) else {
+                return
+            }
+            display(allMusics[prevIndex], at: .end)
         }
     }
 
