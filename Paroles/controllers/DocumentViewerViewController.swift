@@ -46,10 +46,10 @@ class DocumentViewerViewController: UIViewController {
             currentMusicController.willMove(toParentViewController: nil)
         }
         
+        title = music.name
+        
         switch music {
         case is PDFMusic:
-            
-            Log("This is pdf")
             
             guard let documentUrl = repertoryService?.getDocumentURL(for: music as! PDFMusic) else {
                 return
