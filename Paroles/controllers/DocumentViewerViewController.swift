@@ -55,7 +55,10 @@ class DocumentViewerViewController: UIViewController {
                 return
             }
             
-            let data = try! Data(contentsOf: documentUrl)
+            guard let data = try? Data(contentsOf: documentUrl) else {
+                return
+            }
+            
             guard let document = PDFDocument(fileData: data, fileName: music.name ?? "") else {
                 return
             }

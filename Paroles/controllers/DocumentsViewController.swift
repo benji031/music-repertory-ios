@@ -98,7 +98,10 @@ class DocumentsViewController: UIViewController {
             editButton.title = "Edit"
             addButton.isEnabled = true
             repertoryService?.saveOrder(musics, in: repertory)
-            loadDocument()
+//            loadDocument()
+            if let indexPaths = tableView.indexPathsForVisibleRows {
+                tableView.reloadRows(at: indexPaths, with: .none)
+            }
         }
         else
         {
@@ -113,7 +116,7 @@ class DocumentsViewController: UIViewController {
     
     func rename(music: Music, by newName: String) {
         music.name = newName
-        
+        let _ = repertoryService?.save(music)
     }
 
     func delete(music: Music, at indexPath: IndexPath? = nil) {
@@ -203,6 +206,7 @@ extension DocumentsViewController: UITableViewDataSource {
         musics.remove(at: sourceIndexPath.row)
         musics.insert(musicMoved, at: destinationIndexPath.row)
     }
+    
 }
 
 extension DocumentsViewController: UITableViewDelegate {
