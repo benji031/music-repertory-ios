@@ -71,6 +71,8 @@ class RepertoryServiceImpl: RepertoryService {
         repertoryMusic.repertory = repertory
         repertoryMusic.music = music
         
+        repertoryMusic.index = (get(musicsFor: repertory).last?.index ?? -1 ) + 1
+        
         repertory.addToMusics(repertoryMusic)
         
         dataService?.save(context)
