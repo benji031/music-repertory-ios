@@ -74,7 +74,8 @@ class DocumentsViewController: UIViewController {
         }
         if segue.identifier == "LibrarySegue" {
             let destination = (segue.destination as! UINavigationController).viewControllers.first as! LibraryViewController
-            destination.repertoryImport = repertory
+            destination.delegate = self
+            destination.context = repertory.managedObjectContext
         }
     }
  
@@ -286,6 +287,16 @@ extension DocumentsViewController: UIDocumentPickerDelegate {
         }
         
         if isSecured { url.stopAccessingSecurityScopedResource() }
+    }
+    
+}
+
+extension DocumentsViewController: LibraryPickerDelegate {
+    
+    func libraryPicker(controller: LibraryViewController, didPickMusics musics: [Music]) {
+        for music in musics {
+            repertoryService?.add(music, to: repertory)
+        }
     }
     
 }

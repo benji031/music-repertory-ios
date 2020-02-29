@@ -20,7 +20,7 @@ protocol RepertoryService {
     
 
     
-    func getMusics(in context: NSManagedObjectContext) -> [Music]
+    func getMusics(in context: NSManagedObjectContext?) -> [Music]
     func get(musicsFor repertory: Repertory) -> [RepertoryMusic]
     
     func add(_ music: Music, to repertory: Repertory)

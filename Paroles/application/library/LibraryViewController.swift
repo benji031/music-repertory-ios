@@ -8,17 +8,23 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
+
+protocol LibraryPickerDelegate: class {
+    func libraryPicker(controller: LibraryViewController, didPickMusics musics: [Music])
+}
 
 class LibraryViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: LibraryPickerDelegate?
+    
+    var context: NSManagedObjectContext?
     
     var repertoryService: RepertoryService?
     
     var musics = [Music]()
     var selectedMusics = [Music]()
-    
-    var repertoryImport: Repertory?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +37,6 @@ class LibraryViewController: UIViewController {
     }
     
     func reloadData() {
-        guard let context = repertoryImport?.managedObjectContext else {
-            return
-        }
         musics = repertoryService?.getMusics(in: context) ?? [Music]()
         self.tableView.reloadData()
     }
@@ -57,13 +60,8 @@ class LibraryViewController: UIViewController {
     }
     
     @IBAction func doneButtonDidTouch(_ sender: Any) {
-        guard let repertory = repertoryImport else {
-            return
-        }
         
-        for music in selectedMusics {
-            repertoryService?.add(music, to: repertory)
-        }
+        delegate?.libraryPicker(controller: self, didPickMusics: selectedMusics)
         
         dismiss(animated: true, completion: nil)
     }

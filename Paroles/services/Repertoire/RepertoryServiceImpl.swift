@@ -77,7 +77,11 @@ class RepertoryServiceImpl: RepertoryService {
         return repertory
     }
     
-    func getMusics(in context: NSManagedObjectContext) -> [Music] {
+    func getMusics(in context: NSManagedObjectContext?) -> [Music] {
+        guard let context = context != nil ? context : dataService?.getPrivateContext() else {
+            return []
+        }
+        
         let request: NSFetchRequest<Music> = Music.fetchRequest()
         return dataService?.fetchObjects(request: request, on: context) ?? []
     }
