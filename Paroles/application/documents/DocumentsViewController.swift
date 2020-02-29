@@ -86,6 +86,7 @@ class DocumentsViewController: UIViewController {
         actionSheet.addAction(UIAlertAction(title: "Importer", style: .default, handler: { (_) in
             self.importDocument()
         }))
+        actionSheet.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
         actionSheet.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         present(actionSheet, animated: true, completion: nil)
     }
