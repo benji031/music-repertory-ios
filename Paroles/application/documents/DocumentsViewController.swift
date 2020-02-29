@@ -73,7 +73,7 @@ class DocumentsViewController: UIViewController {
             destination.currentMusic = musics[sender as! Int].music
         }
         if segue.identifier == "LibrarySegue" {
-            let destination = segue.destination as! LibraryViewController
+            let destination = (segue.destination as! UINavigationController).viewControllers.first as! LibraryViewController
             destination.repertoryImport = repertory
         }
     }

@@ -33,8 +33,8 @@ class RepertoryServiceImpl: RepertoryService {
         return dataService?.fetchObjects(request: request) ?? []
     }
     
-    func create(pdfMusicWithName name: String, andPdfFile pdfFile: Data, in repertory: Repertory) -> PDFMusic?  {
-        guard let context  = repertory.managedObjectContext else {
+    func create(pdfMusicWithName name: String, andPdfFile pdfFile: Data, in repertory: Repertory? = nil) -> PDFMusic?  {
+        guard let context = repertory != nil ? repertory!.managedObjectContext : dataService?.getPrivateContext() else {
             return nil
         }
         
@@ -52,7 +52,9 @@ class RepertoryServiceImpl: RepertoryService {
         music.documentPath = fileName
         dataService?.save(music)
         
-        insert(music: music, in: repertory)
+        if let repertory = repertory {
+            insert(music: music, in: repertory)
+        }
         
         return music
     }
