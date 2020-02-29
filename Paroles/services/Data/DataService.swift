@@ -3,7 +3,7 @@
 //  scout-ios
 //
 //  Created by Benjamin DENEUX on 13/04/2017.
-//  Copyright © 2017 UBLEAM. All rights reserved.
+//  Copyright © 2017 Bananapp's. All rights reserved.
 //
 
 import Foundation

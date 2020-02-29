@@ -108,21 +108,15 @@
 		4330BFF720AB54EE00C74108 /* Paroles */ = {
 			isa = PBXGroup;
 			children = (
-				4381CC0520C57E4F002A0B51 /* Models */,
-				4381CC0420C57C43002A0B51 /* Utils */,
-				43AD1D8520B8522D00C92526 /* PDFViewer */,
 				4353358120B4B41400F6C7D3 /* Paroles.entitlements */,
-				4330C01420AB586200C74108 /* Resources */,
-				4330C00E20AB583800C74108 /* services */,
 				4330BFF820AB54EE00C74108 /* AppDelegate.swift */,
-				4330BFFE20AB54EE00C74108 /* Main.storyboard */,
-				4330C00120AB54EE00C74108 /* Assets.xcassets */,
-				4330C00320AB54EE00C74108 /* LaunchScreen.storyboard */,
 				4330C00620AB54EE00C74108 /* Info.plist */,
-				43E110F620C80721006313BA /* ColoredButton.swift */,
+				4381CC0520C57E4F002A0B51 /* model */,
+				4381CC0420C57C43002A0B51 /* utils */,
+				4330C01420AB586200C74108 /* resources */,
+				4330C00E20AB583800C74108 /* services */,
 				438B2AD921D91A5E000A8FEF /* views */,
-				438B2AD821D916B6000A8FEF /* controllers */,
-				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
+				438B2AD821D916B6000A8FEF /* application */,
 			);
 			path = Paroles;
 			sourceTree = "<group>";
@@ -146,12 +140,14 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		4330C01420AB586200C74108 /* Resources */ = {
+		4330C01420AB586200C74108 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				4330C00120AB54EE00C74108 /* Assets.xcassets */,
 				4330C01520AB587B00C74108 /* Model.xcdatamodeld */,
+				4330C00320AB54EE00C74108 /* LaunchScreen.storyboard */,
 			);
-			path = Resources;
+			path = resources;
 			sourceTree = "<group>";
 		};
 		4330C01820AB596B00C74108 /* Repertoire */ = {
@@ -163,43 +159,87 @@
 			path = Repertoire;
 			sourceTree = "<group>";
 		};
-		4381CC0420C57C43002A0B51 /* Utils */ = {
+		4381CC0420C57C43002A0B51 /* utils */ = {
 			isa = PBXGroup;
 			children = (
 				4330C01F20AB5D5A00C74108 /* Log.swift */,
 			);
-			path = Utils;
+			path = utils;
 			sourceTree = "<group>";
 		};
-		4381CC0520C57E4F002A0B51 /* Models */ = {
+		4381CC0520C57E4F002A0B51 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				43CCFAFB20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift */,
 				43CCFAFC20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift */,
 			);
-			path = Models;
+			path = model;
 			sourceTree = "<group>";
 		};
-		438B2AD821D916B6000A8FEF /* controllers */ = {
+		438B2AD821D916B6000A8FEF /* application */ = {
 			isa = PBXGroup;
 			children = (
-				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
-				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
-				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
-				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
+				439A45D9240AB9560059C16F /* repertories */,
+				439A45DA240AB9E00059C16F /* documents */,
+				439A45DB240ABA160059C16F /* document */,
+				439A45DD240ABA9D0059C16F /* viewers */,
+				439A45DC240ABA360059C16F /* library */,
 			);
-			path = controllers;
+			path = application;
 			sourceTree = "<group>";
 		};
 		438B2AD921D91A5E000A8FEF /* views */ = {
 			isa = PBXGroup;
 			children = (
-				438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */,
+				43E110F620C80721006313BA /* ColoredButton.swift */,
+				4330BFFE20AB54EE00C74108 /* Main.storyboard */,
 			);
 			path = views;
 			sourceTree = "<group>";
 		};
-		43AD1D8520B8522D00C92526 /* PDFViewer */ = {
+		439A45D9240AB9560059C16F /* repertories */ = {
+			isa = PBXGroup;
+			children = (
+				43E110F820C80EA1006313BA /* RepertoriesViewController.swift */,
+			);
+			path = repertories;
+			sourceTree = "<group>";
+		};
+		439A45DA240AB9E00059C16F /* documents */ = {
+			isa = PBXGroup;
+			children = (
+				43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */,
+				438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */,
+			);
+			path = documents;
+			sourceTree = "<group>";
+		};
+		439A45DB240ABA160059C16F /* document */ = {
+			isa = PBXGroup;
+			children = (
+				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
+			);
+			path = document;
+			sourceTree = "<group>";
+		};
+		439A45DC240ABA360059C16F /* library */ = {
+			isa = PBXGroup;
+			children = (
+				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
+			);
+			path = library;
+			sourceTree = "<group>";
+		};
+		439A45DD240ABA9D0059C16F /* viewers */ = {
+			isa = PBXGroup;
+			children = (
+				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
+				439A45DE240ABAB10059C16F /* pdfViewer */,
+			);
+			path = viewers;
+			sourceTree = "<group>";
+		};
+		439A45DE240ABAB10059C16F /* pdfViewer */ = {
 			isa = PBXGroup;
 			children = (
 				43AD1D9420B8526900C92526 /* PDFReader.storyboard */,
@@ -211,7 +251,7 @@
 				43AD1D8920B8524F00C92526 /* PDFViewController.swift */,
 				43AD1D8B20B8524F00C92526 /* TiledView.swift */,
 			);
-			path = PDFViewer;
+			path = pdfViewer;
 			sourceTree = "<group>";
 		};
 		B7C87D5DFC106CDDBABC02DA /* Pods */ = {
@@ -260,11 +300,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Bananapps;
 				TargetAttributes = {
 					4330BFF420AB54EE00C74108 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1100;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -340,7 +381,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Paroles/Pods-Paroles-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Paroles/Pods-Paroles-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
 				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
 			);
@@ -351,7 +392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Paroles/Pods-Paroles-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Paroles/Pods-Paroles-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -424,6 +465,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -431,6 +473,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -481,6 +524,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -488,6 +532,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -524,6 +569,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Paroles/Paroles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BN7K75ZTE5;
 				INFOPLIST_FILE = Paroles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -531,7 +577,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DLOG_ENABLE -DLOG_DETAIL_INFO";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.repertory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -543,6 +589,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Paroles/Paroles.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = BN7K75ZTE5;
 				INFOPLIST_FILE = Paroles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -550,7 +597,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DLOG_ENABLE -DLOG_DETAIL_INFO";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bananapps.repertory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
