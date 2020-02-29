@@ -228,44 +228,33 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="szh-X9-aGy">
-                                                    <rect key="frame" x="15" y="10" width="30" height="24"/>
+                                                    <rect key="frame" x="10" y="13.5" width="20" height="16.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="m4v-fq-nAF"/>
+                                                        <constraint firstAttribute="width" constant="20" id="m4v-fq-nAF"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="12"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5s-lk-rFb">
-                                                    <rect key="frame" x="60" y="0.0" width="1" height="43.5"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="1" id="y8d-Aa-7rU"/>
-                                                    </constraints>
-                                                </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Music name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5k-ye-H2T">
-                                                    <rect key="frame" x="76" y="10" width="658" height="24"/>
+                                                    <rect key="frame" x="45" y="10" width="689" height="24"/>
                                                     <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="g5s-lk-rFb" secondAttribute="bottom" id="1I1-Js-De0"/>
-                                                <constraint firstItem="g5s-lk-rFb" firstAttribute="top" secondItem="OvP-IT-vPv" secondAttribute="top" id="1Zo-wn-RWc"/>
                                                 <constraint firstItem="o5k-ye-H2T" firstAttribute="centerY" secondItem="OvP-IT-vPv" secondAttribute="centerY" id="1qu-iX-5bD"/>
-                                                <constraint firstItem="g5s-lk-rFb" firstAttribute="leading" secondItem="szh-X9-aGy" secondAttribute="trailing" constant="15" id="Aot-oz-1fY"/>
                                                 <constraint firstAttribute="trailing" secondItem="o5k-ye-H2T" secondAttribute="trailing" constant="8" id="Ixq-nT-pjH"/>
                                                 <constraint firstItem="szh-X9-aGy" firstAttribute="centerY" secondItem="OvP-IT-vPv" secondAttribute="centerY" id="Vha-Za-moM"/>
-                                                <constraint firstItem="szh-X9-aGy" firstAttribute="leading" secondItem="OvP-IT-vPv" secondAttribute="leading" constant="15" id="W7F-Uv-5NC"/>
-                                                <constraint firstItem="o5k-ye-H2T" firstAttribute="leading" secondItem="g5s-lk-rFb" secondAttribute="trailing" constant="15" id="oLO-aq-l4Y"/>
+                                                <constraint firstItem="szh-X9-aGy" firstAttribute="leading" secondItem="OvP-IT-vPv" secondAttribute="leading" constant="10" id="W7F-Uv-5NC"/>
+                                                <constraint firstItem="o5k-ye-H2T" firstAttribute="leading" secondItem="szh-X9-aGy" secondAttribute="trailing" constant="15" id="geq-cf-iFc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.3492623730964467" green="0.3492623730964467" blue="0.3492623730964467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="musicNameLabel" destination="o5k-ye-H2T" id="RWf-Eo-4Hl"/>
                                             <outlet property="orderLabel" destination="szh-X9-aGy" id="YTG-oa-KOK"/>
-                                            <outlet property="widthConstraint" destination="y8d-Aa-7rU" id="fID-FI-tP1"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
