@@ -243,50 +243,25 @@ extension DocumentsViewController: UIDocumentPickerDelegate {
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        importDocumentAt(url: url)
+        guard let _ = repertoryService?.import(pdfMusicFromFile: url, in: repertory) else {
+            let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        loadDocument()
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            importDocumentAt(url: url)
-        }
-    }
-    
-    func importDocumentAt(url: URL) {
-        let isSecured = url.startAccessingSecurityScopedResource()
-        let coordinator = NSFileCoordinator()
-        var error: NSError? = nil
-        coordinator.coordinate(readingItemAt: url, options: [.forUploading], error: &error) { (url) in
-            
-            do {
-                let data = try Data(contentsOf: url)
-                guard let music = repertoryService?.create(pdfMusicWithName: url.lastPathComponent, andPdfFile: data, in: self.repertory) else {
-                    Log("An error occured trying to copy file from document picker view controller to local repertory!")
-                    let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                    return
-                }
-                
-//                let _ = repertoryService?.insert(music: music, in: repertory)
-                self.loadDocument()
-            }
-            catch let error {
-                Log("An error occured trying to copy file from document picker view controller to local repertory! \(error.localizedDescription)")
-                let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu... \(error.localizedDescription)", preferredStyle: .alert)
+            guard let _ = repertoryService?.import(pdfMusicFromFile: url, in: repertory) else {
+                let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                return
             }
-            
-            
+            loadDocument()
         }
-        if let error = error {
-            let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu... \(error.localizedDescription)", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-        
-        if isSecured { url.stopAccessingSecurityScopedResource() }
     }
     
 }
@@ -297,6 +272,7 @@ extension DocumentsViewController: LibraryPickerDelegate {
         for music in musics {
             repertoryService?.add(music, to: repertory)
         }
+        loadDocument()
     }
     
 }
