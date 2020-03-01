@@ -59,6 +59,59 @@ class RepertoryServiceImpl: RepertoryService {
         return music
     }
     
+    func `import`(pdfMusicFromFile url: URL, in repertory: Repertory?) -> PDFMusic? {
+        
+        guard let context = repertory != nil ? repertory!.managedObjectContext : dataService?.getPrivateContext() else {
+            return nil
+        }
+        
+        guard let music = dataService?.create(type: PDFMusic.self, entityName: "PDFMusic", in: context) else {
+            return nil
+        }
+        
+        let isSecured = url.startAccessingSecurityScopedResource()
+        let coordinator = NSFileCoordinator()
+        var error: NSError? = nil
+        
+        coordinator.coordinate(readingItemAt: url, options: [.forUploading], error: &error) { (url) in
+            
+            do {
+                let fileName = UUID().uuidString
+                let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true)
+                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+                let newURL = directory.appendingPathComponent(fileName)
+                // TODO: Copy unstead of data loading.
+                // Copy not working, try later to do properly unstead of load document in memory...
+//                try FileManager.default.copyItem(at: url, to: newURL)
+                let data = try Data(contentsOf: url)
+                try data.write(to: newURL)
+                
+                music.name = url.lastPathComponent
+                music.documentPath = fileName
+                dataService?.save(music)
+                
+                if let repertory = repertory {
+                    insert(music: music, in: repertory)
+                }
+            }
+            catch let error {
+                Log("An error occured trying to copy file to local repertory! \(error.localizedDescription)")
+                dataService?.delete(music)
+                return
+            }
+            
+        }
+        if let error = error {
+            Log("An error occured trying to copy file to local repertory! \(error.localizedDescription)")
+            dataService?.delete(music)
+            return nil
+        }
+        
+        if isSecured { url.stopAccessingSecurityScopedResource() }
+        
+        return music
+    }
+    
     @discardableResult
     func insert(music: Music, in repertory: Repertory) -> Repertory {
         guard let context  = repertory.managedObjectContext else {

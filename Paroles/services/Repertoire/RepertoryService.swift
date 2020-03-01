@@ -14,7 +14,10 @@ protocol RepertoryService {
     func create(repertoryWithName name: String) -> Repertory?
     func getRepertories() -> [Repertory]
     
+    @available(*, deprecated)
     func create(pdfMusicWithName name: String, andPdfFile pdfFile: Data, in repertory: Repertory?) -> PDFMusic?
+    
+    func `import`(pdfMusicFromFile url: URL, in repertory: Repertory?) -> PDFMusic?
 
     func getDocumentURL(for music: PDFMusic) -> URL?
     

@@ -510,7 +510,7 @@
         <!--Navigation Controller-->
         <scene sceneID="dsQ-9e-lrc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EIQ-vG-7Hq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LibraryNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="EIQ-vG-7Hq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Sib-d7-uk1">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>

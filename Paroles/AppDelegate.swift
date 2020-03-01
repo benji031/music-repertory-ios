@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -49,6 +50,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        
+        let repertoryService = SwinjectStoryboard.defaultContainer.resolve(RepertoryService.self)
+        let alertView: UIAlertController
+        if let music = repertoryService?.import(pdfMusicFromFile: url, in: nil) {
+            alertView = UIAlertController(title: "Musique importé", message: "Le document \(music.name ?? "(unnkown)") a bien été importé dans la bibliothèque.", preferredStyle: .alert)
+        }
+        else {
+            alertView = UIAlertController(title: "Erreur", message: "Une erreur est survenue lors de l'importation du document dans la bibliothèque.", preferredStyle: .alert)
+        }
+        
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        window?.rootViewController?.present(alertView, animated: true, completion: nil)
+        return true
+    }
+    
     // MARK: - Split view
 
 //    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController:UIViewController, onto primaryViewController:UIViewController) -> Bool {
