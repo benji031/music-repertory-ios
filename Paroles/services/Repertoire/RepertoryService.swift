@@ -31,4 +31,9 @@ protocol RepertoryService {
     func saveOrder(_ repertoryMusics: [RepertoryMusic], in repertory: Repertory)
     
     func save(_ music: Music) -> Music?
+    
+    
+    // - Music association
+    func associateSound(_ soundUrl: URL, to music: Music) // TODO: Throw error if there is error
+    func getSoundsURL(for music: Music) -> URL?
 }

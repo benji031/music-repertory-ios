@@ -10,6 +10,7 @@ import Foundation
 import CoreData
 
 let kBaseRepertoryDirectory = "repertory"
+let kBaseSoundsDirectoy = "sound"
 
 class RepertoryServiceImpl: RepertoryService {
     
@@ -154,6 +155,13 @@ class RepertoryServiceImpl: RepertoryService {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseRepertoryDirectory, isDirectory: true).appendingPathComponent(filename)
     }
     
+    func getSoundsURL(for music: Music) -> URL? {
+        guard let filename = music.musicPath else {
+            return nil
+        }
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseSoundsDirectoy, isDirectory: true).appendingPathComponent(filename)
+    }
+    
     func add(_ music: Music, to repertory: Repertory) {
         let _ = insert(music: music, in: repertory)
     }
@@ -179,5 +187,40 @@ class RepertoryServiceImpl: RepertoryService {
     func save(_ music: Music) -> Music? {
         dataService?.save(music)
         return music
+    }
+    
+    func associateSound(_ soundUrl: URL, to music: Music) {
+        let isSecured = soundUrl.startAccessingSecurityScopedResource()
+        let coordinator = NSFileCoordinator()
+        var error: NSError? = nil
+        
+        coordinator.coordinate(readingItemAt: soundUrl, options: [.forUploading], error: &error) { (url) in
+            
+            do {
+                let fileName = UUID().uuidString
+                let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseSoundsDirectoy, isDirectory: true)
+                try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+                let newURL = directory.appendingPathComponent(fileName)
+                // TODO: Copy unstead of data loading.
+                // Copy not working, try later to do properly unstead of load document in memory...
+    //                try FileManager.default.copyItem(at: url, to: newURL)
+                let data = try Data(contentsOf: url)
+                try data.write(to: newURL)
+                
+                music.musicPath = fileName
+                dataService?.save(music)
+            }
+            catch let error {
+                Log("An error occured trying to copy file to local sound repertory! \(error.localizedDescription)")
+                return
+            }
+            
+        }
+        if let error = error {
+            Log("An error occured trying to copy file to local sound repertory! \(error.localizedDescription)")
+            return
+        }
+        
+        if isSecured { soundUrl.stopAccessingSecurityScopedResource() }
     }
 }
