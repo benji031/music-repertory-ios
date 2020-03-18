@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Music" representedClassName="Music" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <attribute name="musicPath" optional="YES" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
     </entity>
     <entity name="PDFMusic" representedClassName="PDFMusic" parentEntity="Music" syncable="YES">
@@ -16,10 +15,16 @@
         <relationship name="music" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Music"/>
         <relationship name="repertory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Repertory" inverseName="musics" inverseEntity="Repertory"/>
     </entity>
+    <entity name="Sound" representedClassName="Sound" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="path" optional="YES" attributeType="String"/>
+        <relationship name="music" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Music"/>
+    </entity>
     <elements>
-        <element name="Music" positionX="-54" positionY="0" width="128" height="73"/>
+        <element name="Music" positionX="-54" positionY="0" width="128" height="58"/>
         <element name="PDFMusic" positionX="-45" positionY="36" width="128" height="60"/>
         <element name="Repertory" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="RepertoryMusic" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Sound" positionX="-54" positionY="27" width="128" height="88"/>
     </elements>
 </model>

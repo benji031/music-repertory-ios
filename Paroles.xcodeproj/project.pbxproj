@@ -20,6 +20,10 @@
 		4330C02020AB5D5A00C74108 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01F20AB5D5A00C74108 /* Log.swift */; };
 		4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
+		4373AB772422CAB400CF9C3B /* Sound+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB752422CAB400CF9C3B /* Sound+CoreDataClass.swift */; };
+		4373AB782422CAB400CF9C3B /* Sound+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB762422CAB400CF9C3B /* Sound+CoreDataProperties.swift */; };
+		4373AB7A2422CB0200CF9C3B /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB792422CB0200CF9C3B /* SoundService.swift */; };
+		4373AB7C2422CB4800CF9C3B /* SoundServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB7B2422CB4800CF9C3B /* SoundServiceImpl.swift */; };
 		438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */; };
 		438B2ADB21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
@@ -57,6 +61,10 @@
 		4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewerViewController.swift; sourceTree = "<group>"; };
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
+		4373AB752422CAB400CF9C3B /* Sound+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sound+CoreDataClass.swift"; sourceTree = "<group>"; };
+		4373AB762422CAB400CF9C3B /* Sound+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sound+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		4373AB792422CB0200CF9C3B /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
+		4373AB7B2422CB4800CF9C3B /* SoundServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundServiceImpl.swift; sourceTree = "<group>"; };
 		438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoryMusicTableViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +163,8 @@
 			children = (
 				4330C01920AB597A00C74108 /* RepertoryService.swift */,
 				4330C01B20AB59AD00C74108 /* RepertoryServiceImpl.swift */,
+				4373AB792422CB0200CF9C3B /* SoundService.swift */,
+				4373AB7B2422CB4800CF9C3B /* SoundServiceImpl.swift */,
 			);
 			path = Repertoire;
 			sourceTree = "<group>";
@@ -170,6 +180,8 @@
 		4381CC0520C57E4F002A0B51 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				4373AB752422CAB400CF9C3B /* Sound+CoreDataClass.swift */,
+				4373AB762422CAB400CF9C3B /* Sound+CoreDataProperties.swift */,
 				43CCFAFB20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift */,
 				43CCFAFC20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift */,
 			);
@@ -409,17 +421,21 @@
 				438B2ADB21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift in Sources */,
 				43E110F720C80721006313BA /* ColoredButton.swift in Sources */,
 				4330C01220AB585100C74108 /* CoreDataService.swift in Sources */,
+				4373AB782422CAB400CF9C3B /* Sound+CoreDataProperties.swift in Sources */,
 				4330C01720AB587B00C74108 /* Model.xcdatamodeld in Sources */,
 				43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */,
 				4330C01E20AB5C6B00C74108 /* ServicesRegistry.swift in Sources */,
+				4373AB772422CAB400CF9C3B /* Sound+CoreDataClass.swift in Sources */,
 				43AD1D9320B8524F00C92526 /* PDFDocument.swift in Sources */,
 				43AD1D9020B8524F00C92526 /* PDFViewController.swift in Sources */,
 				43CCFAFE20C9D1B000AC5927 /* PDFMusic+CoreDataProperties.swift in Sources */,
 				4330C01A20AB597A00C74108 /* RepertoryService.swift in Sources */,
+				4373AB7A2422CB0200CF9C3B /* SoundService.swift in Sources */,
 				4330C01320AB585100C74108 /* DataService.swift in Sources */,
 				43AD1D8E20B8524F00C92526 /* PDFPageCollectionViewCell.swift in Sources */,
 				43E110F920C80EA1006313BA /* RepertoriesViewController.swift in Sources */,
 				43C55DE621B2EF9F00E52CD2 /* MusicViewControllable.swift in Sources */,
+				4373AB7C2422CB4800CF9C3B /* SoundServiceImpl.swift in Sources */,
 				43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */,
 				4330C01C20AB59AD00C74108 /* RepertoryServiceImpl.swift in Sources */,
 				4330BFF920AB54EE00C74108 /* AppDelegate.swift in Sources */,

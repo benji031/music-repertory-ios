@@ -94,7 +94,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X2I-gg-2IZ"/>
                     </view>
-                    <toolbarItems/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="fastForward" id="2ne-pw-82D"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="mVE-oc-cMr">
                         <barButtonItem key="backBarButtonItem" title=" " id="Tdx-Cf-OJj"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="sound" id="BGI-F0-jRY">
