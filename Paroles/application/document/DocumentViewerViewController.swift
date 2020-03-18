@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import AVFoundation
 
 class DocumentViewerViewController: UIViewController {
     
@@ -21,6 +22,8 @@ class DocumentViewerViewController: UIViewController {
     var repertoryService: RepertoryService?
     
     var currentMusicController: MusicViewControllable?
+    
+    var audioPlayer: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,8 @@ class DocumentViewerViewController: UIViewController {
             return
         }
         
+        navigationController?.toolbar.barTintColor = navigationController?.navigationBar.barTintColor
+        navigationController?.toolbar.tintColor = navigationController?.navigationBar.tintColor
         display(currentMusic)
     }
     
@@ -78,6 +83,36 @@ class DocumentViewerViewController: UIViewController {
         
         currentMusic = music
         currentMusicController?.go(at: position, animated: false)
+        
+        if let soundUrl = repertoryService?.getSoundsURL(for: music) {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
+                audioPlayer?.prepareToPlay()
+                
+                
+                let session = AVAudioSession.sharedInstance()
+                try session.setCategory(.playback)
+                
+                navigationController?.setToolbarHidden(false, animated: true)
+                setToolbarItems([UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(play))], animated: true)
+            }
+            catch let error {
+                NSLog("Failed start play sound : \(error)")
+            }
+        }
+        else {
+            navigationController?.setToolbarHidden(true, animated: true)
+        }
+    }
+    
+    @objc func play() {
+        audioPlayer?.play()
+        setToolbarItems([UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(pause))], animated: true)
+    }
+    
+    @objc func pause() {
+        audioPlayer?.pause()
+        setToolbarItems([UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(play))], animated: true)
     }
     
     func displayMusicViewer(_ view: UIView) {
