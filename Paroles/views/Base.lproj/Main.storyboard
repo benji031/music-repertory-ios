@@ -71,12 +71,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmB-Tv-txe">
-                                <rect key="frame" x="614.5" y="0.0" width="153.5" height="974"/>
+                                <rect key="frame" x="614.5" y="0.0" width="153.5" height="924"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IV8-HF-Mb9">
-                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="974"/>
+                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="924"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                             </view>
@@ -94,6 +94,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X2I-gg-2IZ"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="mVE-oc-cMr">
                         <barButtonItem key="backBarButtonItem" title=" " id="Tdx-Cf-OJj"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="sound" id="BGI-F0-jRY">
@@ -102,6 +103,7 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="nextView" destination="kmB-Tv-txe" id="OzZ-V8-qbR"/>
                         <outlet property="previousView" destination="IV8-HF-Mb9" id="lUU-9N-Att"/>
@@ -313,7 +315,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="0.50588235294117645" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.26760786800000003" green="0.26760786800000003" blue="0.26760786800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

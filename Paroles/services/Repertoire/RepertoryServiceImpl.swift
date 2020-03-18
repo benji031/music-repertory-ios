@@ -197,7 +197,7 @@ class RepertoryServiceImpl: RepertoryService {
         coordinator.coordinate(readingItemAt: soundUrl, options: [.forUploading], error: &error) { (url) in
             
             do {
-                let fileName = UUID().uuidString
+                let fileName = UUID().uuidString + ".mp3"
                 let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(kBaseSoundsDirectoy, isDirectory: true)
                 try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
                 let newURL = directory.appendingPathComponent(fileName)
