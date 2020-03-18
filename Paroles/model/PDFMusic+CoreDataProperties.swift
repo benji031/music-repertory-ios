@@ -2,8 +2,8 @@
 //  PDFMusic+CoreDataProperties.swift
 //  Paroles
 //
-//  Created by Benjamin DENEUX on 07/06/2018.
-//  Copyright © 2018 Bananapps. All rights reserved.
+//  Created by Benjamin DENEUX on 18/03/2020.
+//  Copyright © 2020 Bananapps. All rights reserved.
 //
 //
 

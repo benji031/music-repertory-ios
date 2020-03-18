@@ -94,6 +94,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X2I-gg-2IZ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mVE-oc-cMr">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Tdx-Cf-OJj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="sound" id="BGI-F0-jRY">
+                            <connections>
+                                <action selector="associateMusicButtonDidTouch:" destination="1Ac-Vc-Q7P" id="x2w-aX-nkr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nextView" destination="kmB-Tv-txe" id="OzZ-V8-qbR"/>
                         <outlet property="previousView" destination="IV8-HF-Mb9" id="lUU-9N-Att"/>
@@ -532,4 +540,7 @@
             <point key="canvasLocation" x="-1495" y="2214"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="sound" width="21.333333969116211" height="21.333333969116211"/>
+    </resources>
 </document>
