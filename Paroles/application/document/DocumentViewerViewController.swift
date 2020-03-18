@@ -20,6 +20,7 @@ class DocumentViewerViewController: UIViewController {
     var repertory: Repertory!
     
     var repertoryService: RepertoryService?
+    var soundService: SoundService?
     
     var currentMusicController: MusicViewControllable?
     
@@ -84,7 +85,7 @@ class DocumentViewerViewController: UIViewController {
         currentMusic = music
         currentMusicController?.go(at: position, animated: false)
         
-        if let soundUrl = repertoryService?.getSoundsURL(for: music) {
+        if let sound = soundService?.find(soundsFor: music).first, let soundUrl = soundService?.getSoundURL(for: sound) {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundUrl)
                 audioPlayer?.prepareToPlay()
@@ -203,7 +204,7 @@ extension DocumentViewerViewController: UIDocumentPickerDelegate {
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        guard let _ = repertoryService?.associateSound(url, to: currentMusic) else {
+        guard let _ = soundService?.import(soundFromFile: url, for: currentMusic) else {
             let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
@@ -213,7 +214,7 @@ extension DocumentViewerViewController: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            guard let _ = repertoryService?.associateSound(url, to: currentMusic) else {
+            guard let _ = soundService?.import(soundFromFile: url, for: currentMusic) else {
                 let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)

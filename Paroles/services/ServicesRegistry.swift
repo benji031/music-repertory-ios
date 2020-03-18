@@ -15,6 +15,9 @@ extension SwinjectStoryboard {
         defaultContainer.register(RepertoryService.self) { r in
             RepertoryServiceImpl(with: r.resolve(DataService.self))
         }
+        defaultContainer.register(SoundService.self) { r in
+            SoundServiceImpl(with: r.resolve(DataService.self))
+        }
         
         defaultContainer.storyboardInitCompleted(RepertoriesViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
@@ -29,6 +32,7 @@ extension SwinjectStoryboard {
         
         defaultContainer.storyboardInitCompleted(DocumentViewerViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
+            c.soundService = r.resolve(SoundService.self)
         }
         
         defaultContainer.storyboardInitCompleted(LibraryViewController.self) { (r, c) in
