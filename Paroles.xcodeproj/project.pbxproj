@@ -18,6 +18,7 @@
 		4330C01C20AB59AD00C74108 /* RepertoryServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01B20AB59AD00C74108 /* RepertoryServiceImpl.swift */; };
 		4330C01E20AB5C6B00C74108 /* ServicesRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */; };
 		4330C02020AB5D5A00C74108 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330C01F20AB5D5A00C74108 /* Log.swift */; };
+		4337FE642423900900C44D6D /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4337FE632423900900C44D6D /* AudioViewController.swift */; };
 		4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */; };
 		43513E7E20B3674C00AA77E9 /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */; };
 		4373AB772422CAB400CF9C3B /* Sound+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB752422CAB400CF9C3B /* Sound+CoreDataClass.swift */; };
@@ -58,6 +59,7 @@
 		4330C01B20AB59AD00C74108 /* RepertoryServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoryServiceImpl.swift; sourceTree = "<group>"; };
 		4330C01D20AB5C6B00C74108 /* ServicesRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesRegistry.swift; sourceTree = "<group>"; };
 		4330C01F20AB5D5A00C74108 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		4337FE632423900900C44D6D /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 		4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewerViewController.swift; sourceTree = "<group>"; };
 		43513E7D20B3674C00AA77E9 /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		4353358120B4B41400F6C7D3 /* Paroles.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Paroles.entitlements; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 		439A45DB240ABA160059C16F /* document */ = {
 			isa = PBXGroup;
 			children = (
+				4337FE632423900900C44D6D /* AudioViewController.swift */,
 				4348EC8421A9C27400B65F6A /* DocumentViewerViewController.swift */,
 			);
 			path = document;
@@ -439,6 +442,7 @@
 				43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */,
 				4330C01C20AB59AD00C74108 /* RepertoryServiceImpl.swift in Sources */,
 				4330BFF920AB54EE00C74108 /* AppDelegate.swift in Sources */,
+				4337FE642423900900C44D6D /* AudioViewController.swift in Sources */,
 				4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */,
 				43AD1D9220B8524F00C92526 /* TiledView.swift in Sources */,
 				43CCFAFD20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift in Sources */,
