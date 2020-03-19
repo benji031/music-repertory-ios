@@ -11,25 +11,60 @@ import AVFoundation
 
 class AudioViewController: UIViewController {
 
-    var playBarButtonItem: UIBarButtonItem!
-    var pauseBarButtonItem: UIBarButtonItem!
-    var stopBarButtonItem: UIBarButtonItem!
-    var sliderBarButtonItem: UIBarButtonItem!
-    
+    var playButton: UIButton!
+    var stopButton: UIButton!
     var slider: UISlider!
-    var updater : CADisplayLink!
+    var currentTimeLabel: UILabel!
+    var durationLabel: UILabel!
     
+    var stackBarButtonItem: UIBarButtonItem!
+    
+    var updater : CADisplayLink!
     var audioPlayer: AVAudioPlayer?
     
     func configure() {
-        playBarButtonItem = UIBarButtonItem(barButtonSystemItem: .play, target: self, action: #selector(AudioViewController.play))
-        pauseBarButtonItem = UIBarButtonItem(barButtonSystemItem: .pause, target: self, action: #selector(AudioViewController.pause))
-        stopBarButtonItem = UIBarButtonItem(image: UIImage(named: "sound_previous"), style: .plain, target: self, action: #selector(stop))
+        currentTimeLabel = UILabel()
+        currentTimeLabel.text = "00:00"
+        currentTimeLabel.textColor = .white
+        
         
         slider = UISlider()
+        slider.addTarget(self, action: #selector(setTime), for: .valueChanged)
         slider.minimumValue = 0
         slider.maximumValue = 100
-        sliderBarButtonItem = UIBarButtonItem(customView: slider)
+        
+        durationLabel = UILabel()
+        durationLabel.text = "00:00"
+        durationLabel.textColor = .white
+        
+        if #available(iOS 12.0, *) {
+            durationLabel.font = UIFont.monospacedSystemFont(ofSize: 8.0, weight: .thin)
+            currentTimeLabel.font = UIFont.monospacedSystemFont(ofSize: 8.0, weight: .thin)
+        } else {
+            durationLabel.font = UIFont.systemFont(ofSize: 8.0, weight: .thin)
+            currentTimeLabel.font = UIFont.systemFont(ofSize: 8.0, weight: .thin)
+        }
+        
+        stopButton = UIButton()
+        stopButton.setImage(UIImage(named: "sound_previous"), for: .normal)
+        stopButton.addTarget(self, action: #selector(stop), for: .touchUpInside)
+        
+        playButton = UIButton()
+        playButton.setImage(UIImage(named: "sound_play"), for: .normal)
+        playButton.addTarget(self, action: #selector(play), for: .touchUpInside)
+        
+        let stackView = UIStackView(frame: navigationController!.toolbar.frame)
+        stackView.addArrangedSubview(stopButton)
+        stackView.addArrangedSubview(currentTimeLabel)
+        stackView.addArrangedSubview(slider)
+        stackView.addArrangedSubview(durationLabel)
+        stackView.addArrangedSubview(playButton)
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.spacing = 8.0
+        
+        stackBarButtonItem = UIBarButtonItem(customView: stackView)
     }
     
     func loadSound(contentOf url: URL) {
@@ -43,7 +78,7 @@ class AudioViewController: UIViewController {
             try session.setCategory(.playback)
             
             navigationController?.setToolbarHidden(false, animated: true)
-                setToolbarItems([stopBarButtonItem, playBarButtonItem, sliderBarButtonItem], animated: true)
+                setToolbarItems([stackBarButtonItem], animated: true)
             
             updater = CADisplayLink(target: self, selector: #selector(updateSliderProgress))
             updater.add(to: RunLoop.current, forMode: RunLoop.Mode.default)
@@ -55,12 +90,14 @@ class AudioViewController: UIViewController {
     
     @objc func play() {
         audioPlayer?.play()
-        setToolbarItems([stopBarButtonItem, pauseBarButtonItem, sliderBarButtonItem], animated: true)
+        playButton.setImage(UIImage(named: "sound_pause"), for: .normal)
+        playButton.addTarget(self, action: #selector(pause), for: .touchUpInside)
     }
     
     @objc func pause() {
         audioPlayer?.pause()
-        setToolbarItems([stopBarButtonItem, playBarButtonItem, sliderBarButtonItem], animated: true)
+        playButton.setImage(UIImage(named: "sound_play"), for: .normal)
+        playButton.addTarget(self, action: #selector(play), for: .touchUpInside)
     }
     
     @objc func stop() {
@@ -74,6 +111,28 @@ class AudioViewController: UIViewController {
         
         let progress = (audioPlayer.currentTime * 100) / audioPlayer.duration
         slider.setValue(Float(progress), animated: true)
+        
+        let formatter = DateComponentsFormatter()
+        formatter.unitsStyle = .positional // Use the appropriate positioning for the current locale
+        formatter.allowedUnits = [ .minute, .second ] // Units to display in the formatted string
+        formatter.zeroFormattingBehavior = [ .pad ] // Pad with zeroes where appropriate for the locale
+        
+        currentTimeLabel.text = formatter.string(from: audioPlayer.currentTime)
+        durationLabel.text = formatter.string(from: audioPlayer.duration)
+        
+        NSLog("Music time : \(formatter.string(from: audioPlayer.currentTime)) | \(formatter.string(from: audioPlayer.duration))")
+    }
+    
+    @objc func setTime() {
+        guard let audioPlayer = audioPlayer else {
+            return
+        }
+        
+//        updater.invalidate()
+        
+        let value = TimeInterval(slider.value)
+        let time = (value * audioPlayer.duration) / 100
+        audioPlayer.currentTime = time
     }
     /*
     // Only override draw() if you perform custom drawing.
