@@ -158,7 +158,7 @@ extension DocumentsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let rename = UITableViewRowAction(style: .normal, title: "Renomer") { (action, indexPath) in
+        let rename = UITableViewRowAction(style: .normal, title: "Renommer") { (action, indexPath) in
             guard let music = self.musics[indexPath.row].music else {
                 return
             }
