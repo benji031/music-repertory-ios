@@ -62,6 +62,64 @@
             </objects>
             <point key="canvasLocation" x="-764.0625" y="776.953125"/>
         </scene>
+        <!--Musiques-->
+        <scene sceneID="3gj-ft-3lK">
+            <objects>
+                <viewController id="57Z-BL-LGI" customClass="SoundViewController" customModule="Paroles" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xrp-sr-Oxk">
+                        <rect key="frame" x="0.0" y="0.0" width="333" height="430"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="YTQ-1G-sfE">
+                                <rect key="frame" x="13" y="0.0" width="320" height="430"/>
+                                <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="checkmark" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SoundCell" textLabel="s8k-N6-wjH" style="IBUITableViewCellStyleDefault" id="86d-Va-IyF">
+                                        <rect key="frame" x="0.0" y="55.5" width="320" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="86d-Va-IyF" id="438-Db-rdS">
+                                            <rect key="frame" x="0.0" y="0.0" width="281" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s8k-N6-wjH">
+                                                    <rect key="frame" x="15" y="0.0" width="258" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YTQ-1G-sfE" firstAttribute="trailing" secondItem="l5r-kh-a8U" secondAttribute="trailing" id="Ohi-fA-He2"/>
+                            <constraint firstItem="YTQ-1G-sfE" firstAttribute="top" secondItem="l5r-kh-a8U" secondAttribute="top" id="R50-be-8up"/>
+                            <constraint firstItem="YTQ-1G-sfE" firstAttribute="leading" secondItem="l5r-kh-a8U" secondAttribute="leading" id="cmE-YJ-tah"/>
+                            <constraint firstItem="YTQ-1G-sfE" firstAttribute="bottom" secondItem="l5r-kh-a8U" secondAttribute="bottom" id="dqy-hn-YD5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l5r-kh-a8U"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Musiques" id="cyN-xo-ofn">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LwX-Jh-pCd">
+                            <connections>
+                                <action selector="addSoundButtonDidTouch:" destination="57Z-BL-LGI" id="Ygy-7R-Wq0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="YTQ-1G-sfE" id="nvx-L9-MQ0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a1N-mP-WMk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2244.53125" y="1667.578125"/>
+        </scene>
         <!--Document Viewer View Controller-->
         <scene sceneID="SUU-E8-Z9B">
             <objects>
@@ -94,14 +152,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="X2I-gg-2IZ"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem systemItem="fastForward" id="2ne-pw-82D"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="mVE-oc-cMr">
                         <barButtonItem key="backBarButtonItem" title=" " id="Tdx-Cf-OJj"/>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="sound" id="BGI-F0-jRY">
                             <connections>
                                 <action selector="associateMusicButtonDidTouch:" destination="1Ac-Vc-Q7P" id="x2w-aX-nkr"/>
+                                <segue destination="DfZ-5m-tS3" kind="popoverPresentation" identifier="SoundSegue" popoverAnchorBarButtonItem="BGI-F0-jRY" id="iME-tX-g1K">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -113,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hQW-oU-DAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2214.0625" y="1594.3359375"/>
+            <point key="canvasLocation" x="-1448.4375" y="1594.3359375"/>
         </scene>
         <!--Repertoires -->
         <scene sceneID="K9Y-YK-CqQ">
@@ -186,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yg8-3c-Ljp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1494.53125" y="1464.84375"/>
+            <point key="canvasLocation" x="-728.90625" y="1464.84375"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CPz-pB-TQi">
@@ -201,7 +260,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSC-Ze-N77" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-764" y="1441"/>
+            <point key="canvasLocation" x="1.5625" y="1440.8203125"/>
         </scene>
         <!--Repertoire-->
         <scene sceneID="WYE-VS-B5K">
@@ -403,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4Z-Dh-WDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="1078"/>
+            <point key="canvasLocation" x="860.15625" y="1077.5390625"/>
         </scene>
         <!--Thumbnail Collection View Controller-->
         <scene sceneID="La4-Zi-MEb">
@@ -451,7 +510,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xb6-kE-dXl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="95" y="1513"/>
+            <point key="canvasLocation" x="860.15625" y="1512.890625"/>
         </scene>
         <!--Bibliothèque-->
         <scene sceneID="7zO-dG-1mR">
@@ -517,7 +576,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uds-Mx-5Z2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-764" y="2214"/>
+            <point key="canvasLocation" x="1.5625" y="2213.671875"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dsQ-9e-lrc">
@@ -541,7 +600,31 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="elL-oH-Yq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1495" y="2214"/>
+            <point key="canvasLocation" x="-729.6875" y="2213.671875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9Se-3a-Wn2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DfZ-5m-tS3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="bBz-Po-cR2">
+                        <rect key="frame" x="0.0" y="0.0" width="333" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="57Z-BL-LGI" kind="relationship" relationship="rootViewController" id="0qn-0l-qpp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rVG-nf-33g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3010.15625" y="1667.578125"/>
         </scene>
     </scenes>
     <resources>
