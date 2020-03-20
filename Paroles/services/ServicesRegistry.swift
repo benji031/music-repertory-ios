@@ -38,5 +38,9 @@ extension SwinjectStoryboard {
         defaultContainer.storyboardInitCompleted(LibraryViewController.self) { (r, c) in
             c.repertoryService = r.resolve(RepertoryService.self)
         }
+        
+        defaultContainer.storyboardInitCompleted(SoundViewController.self) { (r, c) in
+            c.soundService = r.resolve(SoundService.self)
+        }
     }
 }

@@ -119,8 +119,6 @@ class AudioViewController: UIViewController {
         
         currentTimeLabel.text = formatter.string(from: audioPlayer.currentTime)
         durationLabel.text = formatter.string(from: audioPlayer.duration)
-        
-        NSLog("Music time : \(formatter.string(from: audioPlayer.currentTime)) | \(formatter.string(from: audioPlayer.duration))")
     }
     
     @objc func setTime() {
@@ -128,18 +126,9 @@ class AudioViewController: UIViewController {
             return
         }
         
-//        updater.invalidate()
-        
         let value = TimeInterval(slider.value)
         let time = (value * audioPlayer.duration) / 100
         audioPlayer.currentTime = time
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MobileCoreServices
 
 class DocumentViewerViewController: AudioViewController {
     
@@ -16,6 +15,7 @@ class DocumentViewerViewController: AudioViewController {
     
     var allMusics: [Music] = [Music]()
     var currentMusic: Music!
+    var currentSound: Sound?
     var repertory: Repertory!
     
     var repertoryService: RepertoryService?
@@ -84,6 +84,7 @@ class DocumentViewerViewController: AudioViewController {
         
         if let sound = soundService?.find(soundsFor: music).first, let soundUrl = soundService?.getSoundURL(for: sound) {
             loadSound(contentOf: soundUrl)
+            currentSound = sound
             navigationController?.setToolbarHidden(false, animated: true)
         }
         else {
@@ -103,15 +104,21 @@ class DocumentViewerViewController: AudioViewController {
         self.view.layoutIfNeeded()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "SoundSegue" {
+            let destination = (segue.destination as! UINavigationController).viewControllers.first as! SoundViewController
+            destination.music = currentMusic
+            destination.selectedSound = currentSound
+            destination.delegate = self
+        }
     }
-    */
+    
     
     @objc func nextTouched() {
         if currentMusicController?.has(.next) ?? false {
@@ -144,57 +151,21 @@ class DocumentViewerViewController: AudioViewController {
     }
 
     @IBAction func associateMusicButtonDidTouch(_ sender: Any) {
-        importSound()
     }
     
-    func importSound() {
-        let documentPicker = UIDocumentMenuViewController(documentTypes: [String(kUTTypeMP3)], in: .import)
-        documentPicker.modalPresentationStyle = .formSheet
-        documentPicker.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        documentPicker.delegate = self
-        present(documentPicker, animated: true, completion: nil)
-    }
-}
-
-extension DocumentViewerViewController: UIDocumentMenuDelegate {
-    
-    func documentMenuWasCancelled(_ documentMenu: UIDocumentMenuViewController) {
-        documentMenu.dismiss(animated: true, completion: nil)
-    }
-    
-    func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
-        documentPicker.delegate = self
-        if #available(iOS 11.0, *) {
-            documentPicker.allowsMultipleSelection = false
-        }
-        present(documentPicker, animated: true, completion: nil)
-    }
     
 }
 
-extension DocumentViewerViewController: UIDocumentPickerDelegate {
+extension DocumentViewerViewController: SoundViewControllerDelegate {
     
-    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        guard let _ = soundService?.import(soundFromFile: url, for: currentMusic) else {
-            let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            return
+    func soundViewController(_ viewController: SoundViewController, didSelectSound sound: Sound?) {
+        if let sound = sound, let soundUrl = soundService?.getSoundURL(for: sound) {
+            loadSound(contentOf: soundUrl)
+            currentSound = sound
+            navigationController?.setToolbarHidden(false, animated: true)
         }
-    }
-    
-    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        for url in urls {
-            guard let _ = soundService?.import(soundFromFile: url, for: currentMusic) else {
-                let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alert, animated: true, completion: nil)
-                return
-            }
+        else {
+            navigationController?.setToolbarHidden(true, animated: true)
         }
     }
     
