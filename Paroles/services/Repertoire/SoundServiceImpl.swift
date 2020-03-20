@@ -76,6 +76,18 @@ class SoundServiceImpl: SoundService {
         return sound
     }
     
+    func save(_ sound: Sound) -> Sound? {
+        dataService?.save(sound)
+        return sound
+    }
+    
+    func remove(_ sound: Sound) {
+        if let soundUrl = getSoundURL(for: sound) {
+            try? FileManager.default.removeItem(at: soundUrl)
+        }
+        dataService?.delete(sound)
+    }
+    
     func getSoundURL(for sound: Sound) -> URL? {
         guard let filename = sound.path else {
             return nil

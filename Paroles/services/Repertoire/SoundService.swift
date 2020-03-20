@@ -14,5 +14,8 @@ protocol SoundService {
     
     func `import`(soundFromFile url: URL, for music: Music) -> Sound?
     
+    func remove(_ sound: Sound)
+    func save(_ sound: Sound) -> Sound?
+    
     func getSoundURL(for sound: Sound) -> URL?
 }

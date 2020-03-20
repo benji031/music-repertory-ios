@@ -29,17 +29,21 @@ class SoundViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let music = music else {
+        guard let _ = music else {
             dismiss(animated: true, completion: nil)
             return
         }
         
         tableView.dataSource = self
         tableView.delegate = self
-        sounds = soundService?.find(soundsFor: music) ?? []
-        tableView.reloadData()
+        
+        loadSounds()
     }
     
+    func loadSounds() {
+        sounds = soundService?.find(soundsFor: music!) ?? []
+        tableView.reloadData()
+    }
 
     /*
     // MARK: - Navigation
@@ -61,6 +65,20 @@ class SoundViewController: UIViewController {
         documentPicker.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
         documentPicker.delegate = self
         present(documentPicker, animated: true, completion: nil)
+    }
+    
+    func rename(sound: Sound, by newName: String) {
+        sound.name = newName
+        let _ = soundService?.save(sound)
+    }
+    
+    func delete(sound: Sound, at indexPath: IndexPath?) {
+        soundService?.remove(sound)
+
+        if let indexPath = indexPath {
+            sounds.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
     }
 }
 
@@ -102,6 +120,39 @@ extension SoundViewController: UITableViewDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: .normal, title: "Renommer") { (action, indexPath) in
+            let sound = self.sounds[indexPath.row]
+
+            let alert = UIAlertController(title: "Renommer", message: "Entrez le nom du son", preferredStyle: .alert)
+            alert.addTextField(configurationHandler: { (textField) in
+                textField.text = sound.name
+            })
+            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
+                guard let newName = alert.textFields?.first?.text else {
+                    return
+                }
+                self.rename(sound: sound, by: newName)
+                self.loadSounds()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
+            let sound = self.sounds[indexPath.row]
+
+            let alert = UIAlertController(title: "Supprimer", message: "Voulez-vous vraiment supprimer le son \(sound.name ?? "") ?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
+                self.delete(sound: sound, at: indexPath)
+            }))
+            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        return [rename, delete]
+    }
 }
 
 extension SoundViewController: UIDocumentMenuDelegate {
@@ -133,6 +184,7 @@ extension SoundViewController: UIDocumentPickerDelegate {
             self.present(alert, animated: true, completion: nil)
             return
         }
+        loadSounds()
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
@@ -143,6 +195,7 @@ extension SoundViewController: UIDocumentPickerDelegate {
                 self.present(alert, animated: true, completion: nil)
                 return
             }
+            loadSounds()
         }
     }
     
