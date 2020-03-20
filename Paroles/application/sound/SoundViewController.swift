@@ -178,24 +178,28 @@ extension SoundViewController: UIDocumentPickerDelegate {
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
-        guard let _ = soundService?.import(soundFromFile: url, for: music!) else {
+        guard let sound = soundService?.import(soundFromFile: url, for: music!) else {
             let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             return
         }
         loadSounds()
+        delegate?.soundViewController(self, didSelectSound: sound)
+        dismiss(animated: true, completion: nil)
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
-            guard let _ = soundService?.import(soundFromFile: url, for: music!) else {
+            guard let sound = soundService?.import(soundFromFile: url, for: music!) else {
                 let alert = UIAlertController(title: "Erreur", message: "Impossible de copier le fichier, une erreur est survenu...", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
                 return
             }
             loadSounds()
+            delegate?.soundViewController(self, didSelectSound: sound)
+            dismiss(animated: true, completion: nil)
         }
     }
     
