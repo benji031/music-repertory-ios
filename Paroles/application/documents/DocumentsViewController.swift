@@ -45,6 +45,8 @@ class DocumentsViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.loadDocument()
+        
+        navigationController?.setToolbarHidden(true, animated: true)
     }
     
     @objc func loadDocument() {
