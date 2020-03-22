@@ -28,6 +28,18 @@ class RepertoryServiceImpl: RepertoryService {
         return repertory
     }
     
+    func save(_ repertory: Repertory) -> Repertory? {
+        dataService?.save(repertory)
+        return repertory
+    }
+    
+    func remove(_ repertory: Repertory) {
+        // Remove all musics link from repertory.
+        get(musicsFor: repertory).forEach({ dataService?.delete($0) })
+        // Then remove repertory
+        dataService?.delete(repertory)
+    }
+    
     func getRepertories() -> [Repertory] {
         let request: NSFetchRequest<Repertory> = Repertory.fetchRequest()
         return dataService?.fetchObjects(request: request) ?? []
