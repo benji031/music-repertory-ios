@@ -96,7 +96,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YTQ-1G-sfE" firstAttribute="trailing" secondItem="l5r-kh-a8U" secondAttribute="trailing" id="Ohi-fA-He2"/>
                             <constraint firstItem="YTQ-1G-sfE" firstAttribute="top" secondItem="l5r-kh-a8U" secondAttribute="top" id="R50-be-8up"/>
@@ -546,7 +546,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.34926237310000002" green="0.34926237310000002" blue="0.34926237310000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zYV-Pz-CEd" firstAttribute="trailing" secondItem="Nwi-pO-9Ri" secondAttribute="trailing" id="47i-X1-0R1"/>
                             <constraint firstItem="zYV-Pz-CEd" firstAttribute="leading" secondItem="Nwi-pO-9Ri" secondAttribute="leading" id="Ijg-1U-baL"/>
@@ -586,6 +586,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Sib-d7-uk1">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.26760786800000003" green="0.26760786800000003" blue="0.26760786800000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -610,6 +611,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="bBz-Po-cR2">
                         <rect key="frame" x="0.0" y="0.0" width="333" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" red="1" green="0.50588235290000005" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <textAttributes key="titleTextAttributes">

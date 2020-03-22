@@ -80,7 +80,10 @@ extension LibraryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MusicCell", for: indexPath)
         
-        cell.textLabel?.text = musics[indexPath.row].name
+        let music = musics[indexPath.row]
+        cell.textLabel?.text = music.name
+        cell.isSelected = selectedMusics.contains(music)
+        cell.accessoryType = cell.isSelected ? .checkmark : .none
         
         return cell
     }
