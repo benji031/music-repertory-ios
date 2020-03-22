@@ -12,6 +12,8 @@ import CoreData
 protocol RepertoryService {
     
     func create(repertoryWithName name: String) -> Repertory?
+    func remove(_ repertory: Repertory)
+    func save(_ repertory: Repertory) -> Repertory?
     func getRepertories() -> [Repertory]
     
     @available(*, deprecated)

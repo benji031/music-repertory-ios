@@ -73,7 +73,19 @@ class RepertoriesViewController: UIViewController {
         }
     }
     
+    func rename(repertory: Repertory, by newName: String) {
+        repertory.name = newName
+        let _ = repertoryService?.save(repertory)
+    }
+    
+    func delete(repertory: Repertory, at indexPath: IndexPath?) {
+        repertoryService?.remove(repertory)
 
+        if let indexPath = indexPath {
+            repertories.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -131,4 +143,37 @@ extension RepertoriesViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let rename = UITableViewRowAction(style: .normal, title: "Renommer") { (action, indexPath) in
+            let repertory = self.repertories[indexPath.row]
+
+            let alert = UIAlertController(title: "Renommer", message: "Entrez le nom du repertoire", preferredStyle: .alert)
+            alert.addTextField(configurationHandler: { (textField) in
+                textField.text = repertory.name
+            })
+            alert.addAction(UIAlertAction(title: "Annuler", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Valider", style: .default, handler: { (action) in
+                guard let newName = alert.textFields?.first?.text else {
+                    return
+                }
+                self.rename(repertory: repertory, by: newName)
+                self.loadRepertories()
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        let delete = UITableViewRowAction(style: .destructive, title: "Supprimer") { (action, indexPath) in
+            let repertory = self.repertories[indexPath.row]
+
+            let alert = UIAlertController(title: "Supprimer", message: "Voulez-vous vraiment supprimer le repertoire \(repertory.name ?? "") ?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Oui", style: .destructive, handler: { (_) in
+                self.delete(repertory: repertory, at: indexPath)
+            }))
+            alert.addAction(UIAlertAction(title: "Non", style: .default, handler: nil))
+
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        return [rename, delete]
+    }
 }
