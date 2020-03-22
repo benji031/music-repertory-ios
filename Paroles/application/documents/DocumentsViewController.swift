@@ -155,6 +155,7 @@ extension DocumentsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath) as! RepertoryMusicTableViewCell
         
         cell.repertoryMusic = musics[indexPath.row]
+        cell.orderLabel.text = "\(indexPath.row + 1)"
         
         return cell
     }

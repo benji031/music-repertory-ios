@@ -15,7 +15,6 @@ class RepertoryMusicTableViewCell: UITableViewCell {
     
     var repertoryMusic: RepertoryMusic? {
         didSet {
-            orderLabel.text = "\((repertoryMusic?.index ?? 0) + 1)"
             musicNameLabel.text = repertoryMusic?.music?.name
         }
     }
