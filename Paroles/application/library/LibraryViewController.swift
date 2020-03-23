@@ -16,7 +16,15 @@ protocol LibraryPickerDelegate: class {
 
 class LibraryViewController: UIViewController {
 
+    enum Mode {
+        case select
+        case manage
+    }
+    
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var doneBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var addBarButtonItem: UIBarButtonItem!
+    
     weak var delegate: LibraryPickerDelegate?
     
     var context: NSManagedObjectContext?
@@ -26,6 +34,8 @@ class LibraryViewController: UIViewController {
     var musics = [Music]()
     var selectedMusics = [Music]()
     
+    var mode: Mode = .manage
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -33,6 +43,20 @@ class LibraryViewController: UIViewController {
         tableView.delegate = self
         tableView.allowsMultipleSelection = true
         
+        switch mode {
+        case .select:
+            navigationItem.rightBarButtonItems = [doneBarButtonItem, addBarButtonItem]
+            break
+        case .manage:
+            navigationItem.rightBarButtonItems = [addBarButtonItem]
+            break
+        }
+        
+        reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         reloadData()
     }
     
@@ -41,15 +65,19 @@ class LibraryViewController: UIViewController {
         self.tableView.reloadData()
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "DocumentSegue" {
+            let destination = (segue.destination as! UINavigationController).viewControllers.first as! DocumentViewerViewController
+            destination.currentMusic = sender as? Music
+        }
     }
-    */
+    
 
     @IBAction func addButtonDidTouch(_ sender: Any) {
         let documentPicker = UIDocumentMenuViewController(documentTypes: [String(kUTTypePDF)], in: .import)
@@ -82,9 +110,16 @@ extension LibraryViewController: UITableViewDataSource {
         
         let music = musics[indexPath.row]
         cell.textLabel?.text = music.name
-        cell.isSelected = selectedMusics.contains(music)
-        cell.accessoryType = cell.isSelected ? .checkmark : .none
         
+        switch mode {
+        case .select:
+            cell.isSelected = selectedMusics.contains(music)
+            cell.accessoryType = cell.isSelected ? .checkmark : .none
+            break
+        case .manage:
+            cell.accessoryType = .disclosureIndicator
+            break
+        } 
         return cell
     }
 }
@@ -92,17 +127,32 @@ extension LibraryViewController: UITableViewDataSource {
 extension LibraryViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .checkmark
+        switch mode {
+        case .select:
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.accessoryType = .checkmark
+            }
+            selectedMusics.append(musics[indexPath.row])
+            break
+        case .manage:
+            performSegue(withIdentifier: "DocumentSegue", sender: musics[indexPath.row])
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+            break
         }
-        selectedMusics.append(musics[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            cell.accessoryType = .none
+        switch mode {
+        case .select:
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.accessoryType = .none
+            }
+            selectedMusics.removeAll(where: { $0 === musics[indexPath.row] })
+            break
+        case .manage:
+            tableView.deselectRow(at: indexPath, animated: true)
+            break
         }
-        selectedMusics.removeAll(where: { $0 === musics[indexPath.row] })
     }
     
 }

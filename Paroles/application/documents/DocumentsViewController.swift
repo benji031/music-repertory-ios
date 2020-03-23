@@ -78,6 +78,7 @@ class DocumentsViewController: UIViewController {
             let destination = (segue.destination as! UINavigationController).viewControllers.first as! LibraryViewController
             destination.delegate = self
             destination.context = repertory.managedObjectContext
+            destination.mode = .select
         }
     }
  
