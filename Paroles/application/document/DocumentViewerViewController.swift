@@ -40,6 +40,7 @@ class DocumentViewerViewController: AudioViewController {
         navigationController?.toolbar.barTintColor = navigationController?.navigationBar.barTintColor
         navigationController?.toolbar.tintColor = navigationController?.navigationBar.tintColor
         navigationController?.toolbar.isTranslucent = navigationController?.navigationBar.isTranslucent ?? false
+        
         display(currentMusic)
     }
     
