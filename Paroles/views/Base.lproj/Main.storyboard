@@ -596,7 +596,7 @@
         <!--Bibliothèque-->
         <scene sceneID="lwn-Al-noE">
             <objects>
-                <splitViewController extendedLayoutIncludesOpaqueBars="YES" id="qdq-h3-yFn" sceneMemberID="viewController">
+                <splitViewController extendedLayoutIncludesOpaqueBars="YES" id="qdq-h3-yFn" customClass="LibrarySplitViewController" customModule="Paroles" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bibliothèque" image="tabbar_library" id="0Zz-vg-NDB"/>
                     <connections>
                         <segue destination="EIQ-vG-7Hq" kind="relationship" relationship="masterViewController" id="7aE-g5-ZUq"/>

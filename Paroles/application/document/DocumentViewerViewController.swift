@@ -42,6 +42,12 @@ class DocumentViewerViewController: AudioViewController {
         navigationController?.toolbar.isTranslucent = navigationController?.navigationBar.isTranslucent ?? false
         
         display(currentMusic)
+        
+        if let splitViewController = splitViewController {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+            }
+        }
     }
     
     func display(_ music: Music, at position: Position = .start) {

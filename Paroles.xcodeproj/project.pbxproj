@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4317738924240F9000908BFB /* SoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317738824240F9000908BFB /* SoundViewController.swift */; };
+		43239894242A7A5800B2BEF5 /* LibrarySplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43239893242A7A5800B2BEF5 /* LibrarySplitViewController.swift */; };
 		4330BFF920AB54EE00C74108 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330BFF820AB54EE00C74108 /* AppDelegate.swift */; };
 		4330C00020AB54EE00C74108 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4330BFFE20AB54EE00C74108 /* Main.storyboard */; };
 		4330C00220AB54EE00C74108 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4330C00120AB54EE00C74108 /* Assets.xcassets */; };
@@ -48,6 +49,7 @@
 		34FC11F5704C664112ED1A2A /* Pods-Paroles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paroles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Paroles/Pods-Paroles.release.xcconfig"; sourceTree = "<group>"; };
 		35DE5E0BA58614B252E09BB2 /* Pods-Paroles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Paroles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Paroles/Pods-Paroles.debug.xcconfig"; sourceTree = "<group>"; };
 		4317738824240F9000908BFB /* SoundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundViewController.swift; sourceTree = "<group>"; };
+		43239893242A7A5800B2BEF5 /* LibrarySplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySplitViewController.swift; sourceTree = "<group>"; };
 		4330BFF520AB54EE00C74108 /* Paroles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paroles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4330BFF820AB54EE00C74108 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4330BFFF20AB54EE00C74108 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 		439A45DC240ABA360059C16F /* library */ = {
 			isa = PBXGroup;
 			children = (
+				43239893242A7A5800B2BEF5 /* LibrarySplitViewController.swift */,
 				438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */,
 			);
 			path = library;
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */,
+				43239894242A7A5800B2BEF5 /* LibrarySplitViewController.swift in Sources */,
 				43AD1D9120B8524F00C92526 /* PDFThumbnailCell.swift in Sources */,
 				4330C02020AB5D5A00C74108 /* Log.swift in Sources */,
 				43AD1D8F20B8524F00C92526 /* PDFPageView.swift in Sources */,

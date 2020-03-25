@@ -53,6 +53,14 @@ class LibraryViewController: UIViewController {
         }
         
         reloadData()
+        
+        if let split = self.splitViewController {
+            let controllers = split.viewControllers
+            let controller = (controllers.last as? UINavigationController)?.viewControllers.first as? DocumentViewerViewController
+
+            // this line sets the "default" item
+            controller?.currentMusic = musics.first
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,6 +103,14 @@ class LibraryViewController: UIViewController {
     }
 }
 
+extension LibraryViewController: UISplitViewControllerDelegate {
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        return true
+    }
+    
+}
+
 extension LibraryViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,9 +131,11 @@ extension LibraryViewController: UITableViewDataSource {
         case .select:
             cell.isSelected = selectedMusics.contains(music)
             cell.accessoryType = cell.isSelected ? .checkmark : .none
+            cell.selectionStyle = .none
             break
         case .manage:
             cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .gray
             break
         } 
         return cell
