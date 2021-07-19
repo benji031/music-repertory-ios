@@ -10,9 +10,6 @@ import UIKit
 
 class DocumentViewerViewController: AudioViewController {
     
-    @IBOutlet weak var previousView: UIView!
-    @IBOutlet weak var nextView: UIView!
-    
     var allMusics: [Music] = [Music]()
     var currentMusic: Music!
     var currentSound: Sound?
@@ -23,14 +20,15 @@ class DocumentViewerViewController: AudioViewController {
     
     var currentMusicController: MusicViewControllable?
     
+    var touchGestureRecognizer: UITapGestureRecognizer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
-        let nextTouchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(nextTouched))
-        nextView.addGestureRecognizer(nextTouchGestureRecognizer)
-        let previousTouchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(previousTouched))
-        previousView.addGestureRecognizer(previousTouchGestureRecognizer)
+        touchGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(nextTouched(_:)))
+        touchGestureRecognizer.delegate = self
+        self.view.addGestureRecognizer(touchGestureRecognizer)
         
         guard let currentMusic = self.currentMusic else {
             self.navigationController?.popViewController(animated: true)
@@ -64,11 +62,19 @@ class DocumentViewerViewController: AudioViewController {
                 return
             }
             
-            guard let document = PDFDocument(fileData: data, fileName: music.name ?? "") else {
-                return
+            let pdfViewController: (UIViewController & MusicViewControllable)
+             
+            if #available(iOS 11.0, *) {
+                pdfViewController = PDFKitViewController(fileData: data)
+            } else {
+                guard let document = PDFDocument(fileData: data, fileName: music.name ?? "") else {
+                    return
+                }
+                
+                pdfViewController = PDFViewController.createNew(with: document)
             }
             
-            let pdfViewController = PDFViewController.createNew(with: document)
+            
             
             addChild(pdfViewController)
             pdfViewController.didMove(toParent: self)
@@ -121,33 +127,40 @@ class DocumentViewerViewController: AudioViewController {
     }
     
     
-    @objc func nextTouched() {
-        if currentMusicController?.has(.next) ?? false {
-            currentMusicController?.go(to: .next)
+    @objc func nextTouched(_ sender: UITapGestureRecognizer) {
+        Log("Location : \(sender.location(in: self.view)) | frame : \(view.frame)")
+        
+        let touchXPosition = sender.location(in: self.view).x
+        let viewWidth = view.frame.width
+        
+        if (touchXPosition - (viewWidth / 4) * 3) < touchXPosition && (touchXPosition - (viewWidth / 4) * 3) > 0 {
+        
+            if currentMusicController?.has(.next) ?? false {
+                currentMusicController?.go(to: .next)
+            }
+            else {
+                guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
+                    return
+                }
+                guard let nextIndex = allMusics.index(currentIndex, offsetBy: 1, limitedBy: allMusics.count - 1) else {
+                    return
+                }
+                display(allMusics[nextIndex])
+            }
         }
-        else {
-            guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
-                return
+        else if touchXPosition <= viewWidth / 4 {
+            if currentMusicController?.has(.previous) ?? false {
+                currentMusicController?.go(to: .previous)
             }
-            guard let nextIndex = allMusics.index(currentIndex, offsetBy: 1, limitedBy: allMusics.count - 1) else {
-                return
+            else {
+                guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
+                    return
+                }
+                guard let prevIndex = allMusics.index(currentIndex, offsetBy: -1, limitedBy: 0) else {
+                    return
+                }
+                display(allMusics[prevIndex], at: .end)
             }
-            display(allMusics[nextIndex])
-        }
-    }
-    
-    @objc func previousTouched() {
-        if currentMusicController?.has(.previous) ?? false {
-            currentMusicController?.go(to: .previous)
-        }
-        else {
-            guard let currentIndex = allMusics.firstIndex(of: currentMusic) else {
-                return
-            }
-            guard let prevIndex = allMusics.index(currentIndex, offsetBy: -1, limitedBy: 0) else {
-                return
-            }
-            display(allMusics[prevIndex], at: .end)
         }
     }
 
@@ -168,6 +181,15 @@ extension DocumentViewerViewController: SoundViewControllerDelegate {
         else {
             navigationController?.setToolbarHidden(true, animated: true)
         }
+    }
+    
+}
+
+extension DocumentViewerViewController: UIGestureRecognizerDelegate {
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
     }
     
 }

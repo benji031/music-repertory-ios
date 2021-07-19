@@ -26,6 +26,7 @@
 		4373AB782422CAB400CF9C3B /* Sound+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB762422CAB400CF9C3B /* Sound+CoreDataProperties.swift */; };
 		4373AB7A2422CB0200CF9C3B /* SoundService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB792422CB0200CF9C3B /* SoundService.swift */; };
 		4373AB7C2422CB4800CF9C3B /* SoundServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4373AB7B2422CB4800CF9C3B /* SoundServiceImpl.swift */; };
+		437F1D4426A6123400501A62 /* PDFKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437F1D4326A6123400501A62 /* PDFKitViewController.swift */; };
 		438B2AD721D8FF64000A8FEF /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */; };
 		438B2ADB21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */; };
 		43AD1D8D20B8524F00C92526 /* PDFThumbnailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */; };
@@ -69,6 +70,7 @@
 		4373AB762422CAB400CF9C3B /* Sound+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sound+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4373AB792422CB0200CF9C3B /* SoundService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundService.swift; sourceTree = "<group>"; };
 		4373AB7B2422CB4800CF9C3B /* SoundServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundServiceImpl.swift; sourceTree = "<group>"; };
+		437F1D4326A6123400501A62 /* PDFKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitViewController.swift; sourceTree = "<group>"; };
 		438B2AD621D8FF64000A8FEF /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		438B2ADA21D91AAB000A8FEF /* RepertoryMusicTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepertoryMusicTableViewCell.swift; sourceTree = "<group>"; };
 		43AD1D8620B8524F00C92526 /* PDFThumbnailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFThumbnailCollectionViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +183,14 @@
 			path = Repertoire;
 			sourceTree = "<group>";
 		};
+		437F1D4226A6121800501A62 /* pdfKit */ = {
+			isa = PBXGroup;
+			children = (
+				437F1D4326A6123400501A62 /* PDFKitViewController.swift */,
+			);
+			path = pdfKit;
+			sourceTree = "<group>";
+		};
 		4381CC0420C57C43002A0B51 /* utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				43C55DE521B2EF9F00E52CD2 /* MusicViewControllable.swift */,
+				437F1D4226A6121800501A62 /* pdfKit */,
 				439A45DE240ABAB10059C16F /* pdfViewer */,
 			);
 			path = viewers;
@@ -457,6 +468,7 @@
 				4337FE642423900900C44D6D /* AudioViewController.swift in Sources */,
 				4348EC8521A9C27400B65F6A /* DocumentViewerViewController.swift in Sources */,
 				43AD1D9220B8524F00C92526 /* TiledView.swift in Sources */,
+				437F1D4426A6123400501A62 /* PDFKitViewController.swift in Sources */,
 				43CCFAFD20C9D1B000AC5927 /* PDFMusic+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
