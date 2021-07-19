@@ -37,7 +37,7 @@ class AudioViewController: UIViewController {
         durationLabel.text = "00:00"
         durationLabel.textColor = .white
         
-        if #available(iOS 12.0, *) {
+        if #available(iOS 13.0, *) {
             durationLabel.font = UIFont.monospacedSystemFont(ofSize: 8.0, weight: .thin)
             currentTimeLabel.font = UIFont.monospacedSystemFont(ofSize: 8.0, weight: .thin)
         } else {
